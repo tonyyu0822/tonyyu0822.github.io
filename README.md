@@ -1,14 +1,17 @@
 # Nerfies
 
-This is the repository that contains source code for the [Nerfies website](https://nerfies.github.io).
+This is the repository that contains source code for the [Transplat website](https://tonyyu0822.github.io).
 
 If you find Nerfies useful for your work please cite:
 ```
-@article{park2021nerfies
-  author    = {Park, Keunhong and Sinha, Utkarsh and Barron, Jonathan T. and Bouaziz, Sofien and Goldman, Dan B and Seitz, Steven M. and Martin-Brualla, Ricardo},
-  title     = {Nerfies: Deformable Neural Radiance Fields},
-  journal   = {ICCV},
-  year      = {2021},
+@misc{boyang2025transplatlightingconsistentcrosssceneobject,
+      title={TranSplat: Lighting-Consistent Cross-Scene Object Transfer with 3D Gaussian Splatting}, 
+      author={Boyang and Yu and Yanlin Jin and Ashok Veeraraghavan and Akshat Dave and Guha Balakrishnan},
+      year={2025},
+      eprint={2503.22676},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2503.22676}, 
 }
 ```
 
