@@ -218,12 +218,6 @@
             <source src="./static/videos/roomScene_slider.mp4"
                     type="video/mp4">
           </video>
-        </div>
-        <div class="item item-mask">
-          <video poster="" id="mask" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/mask.mp4"
-                    type="video/mp4">
-          </video>
 
         </div>
       </div>
@@ -255,7 +249,7 @@
   </div>
 </section>
 
-
+<!-- 
     <!-- Paper video. -->
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
@@ -268,8 +262,60 @@
     </div>
     <!--/ Paper video. -->
   </div>
+</section> -->
+
+<!-- Motivation -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Motivation</h2>
+        <div class="content has-text-justified">
+          <p>
+            The Gaussian Splatting (GS) framework represents a scene as optimizable Gaussian primitives, offering fast, differentiable rendering and semantic decomposition. Building on GS, recent methods enable interactive scene editing—recoloring objects or inserting new ones—by manipulating these primitives.
+          </p>
+          <p>
+            We tackle the fundamental task of transferring a 3D object from one scene to another with realistic relighting. This involves (1) extracting and aligning the object in 3D, and (2) removing source lighting effects and applying target‐scene illumination without estimating explicit material properties. To meet these challenges, we introduce TranSplat.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
+<!-- Method -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Method</h2>
+        <div class="content has-text-centered">
+          <figure class="image">
+            <img src="./static/images/transplat.pdf" alt="TranSplat Method Overview">
+            <figcaption>Figure 1: Overview of the TranSplat pipeline.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Experiments -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Experiments</h2>
+        <div class="content has-text-centered">
+          <figure class="image">
+            <img src="./static/images/Experiment.png" alt="TranSplat Experimental Results">
+            <figcaption>Figure 2: Qualitative and quantitative results across synthetic and real-world scenes.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section class="section">
   <div class="container is-max-desktop">
