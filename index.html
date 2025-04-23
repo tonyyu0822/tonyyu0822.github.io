@@ -291,7 +291,15 @@
         <h2 class="title is-3">Method</h2>
         <div class="content has-text-centered">
           <figure class="image">
-            <img src="./static/images/transplat.pdf" alt="TranSplat Method Overview">
+            <object 
+              data="./static/images/transplat.pdf" 
+              type="application/pdf" 
+              width="100%" 
+              height="600">
+              <p>Your browser doesn’t support inline PDFs. 
+                 <a href="./static/images/transplat.pdf" target="_blank">Download the PDF</a>.
+              </p>
+            </object>
             <figcaption>Figure 1: Overview of the TranSplat pipeline.</figcaption>
           </figure>
         </div>
@@ -307,9 +315,14 @@
       <div class="column is-four-fifths">
         <h2 class="title is-3">Experiments</h2>
         <div class="content has-text-centered">
-          <figure class="image">
-            <img src="./static/images/Experiment.png" alt="TranSplat Experimental Results">
-            <figcaption>Figure 2: Qualitative and quantitative results across synthetic and real-world scenes.</figcaption>
+          <figure class="image experiments-figure">
+            <img 
+              src="./static/images/Experiment.png" 
+              alt="TranSplat Experimental Results"
+            >
+            <figcaption>
+              Figure 2: Qualitative and quantitative results across synthetic and real-world scenes.
+            </figcaption>
           </figure>
         </div>
       </div>
