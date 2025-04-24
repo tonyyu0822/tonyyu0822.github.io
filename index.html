@@ -267,52 +267,63 @@
     </div>
   </div>
 </section>
-<!-- Method (full-width at 85%) -->
+<!-- Method -->
 <section class="section">
-  <h2 class="title is-3 has-text-centered">Method</h2>
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Method</h2>
 
-  <figure class="image" style="width:85%; margin:0 auto 1.5rem auto;">
-    <img
-      src="./static/images/Method.png"
-      alt="TranSplat Method Overview"
-      style="width:100%; height:auto; display:block;"
-    >
-    <figcaption class="has-text-centered" style="margin:0.5rem 0;">
-      Figure 1: Overview of the TranSplat pipeline.
-    </figcaption>
-  </figure>
+        <figure class="image">
+          <img
+            src="./static/images/Method.png"
+            alt="TranSplat Method Overview"
+          >
+          <figcaption class="has-text-centered">
+            Figure 1: Overview of the TranSplat pipeline.
+          </figcaption>
+        </figure>
 
-  <div class="content has-text-justified">
-    <p>
-      <strong>(Top)</strong> TranSplat fits a Gaussian Surfels <sup>[10]</sup> model of the source scene (S) from input images and corresponding object masks. By optimizing per-Gaussian object labels, it extracts the object geometry (and normals) from S, and simultaneously estimates an environment map via a rendered cubemap centered around the object, leveraging the Gaussian radiance values in the fitted model.
-    </p>
-    <p>
-      <strong>(Bottom)</strong> TranSplat then fits a 3D Gaussian Splatting model to the target scene (T), and derives a second environment map based on the user-specified object location and scale within T.
-    </p>
-    <p>
-      Using S and T’s environment maps along with the extracted object normals, we perform relighting by rescaling each Gaussian’s spherical harmonic (SH) appearance coefficients. Specifically, we multiply S’s SH coefficients by the per-coefficient ratio of T’s to S’s environment maps, further modulated by a shading map that measures how much each environment pixel contributes radiance to each Gaussian.
-    </p>
-    <p>
-      Finally, the relit Gaussians are merged into a single splatting model, which is used to render novel views of the object transplanted into the target scene.
-    </p>
+        <div class="content has-text-justified">
+          <p>
+            <strong>(Top)</strong> TranSplat fits a Gaussian Surfels <sup>[10]</sup> model of the source scene (S) from input images and corresponding object masks. By optimizing per-Gaussian object labels, it extracts the object geometry (and normals) from S, and simultaneously estimates an environment map via a rendered cubemap centered around the object, leveraging the Gaussian radiance values in the fitted model.
+          </p>
+          <p>
+            <strong>(Bottom)</strong> TranSplat then fits a 3D Gaussian Splatting model to the target scene (T), and derives a second environment map based on the user-specified object location and scale within T.
+          </p>
+          <p>
+            Using S and T’s environment maps along with the extracted object normals, we perform relighting by rescaling each Gaussian’s spherical harmonic (SH) appearance coefficients. Specifically, we multiply S’s SH coefficients by the per-coefficient ratio of T’s to S’s environment maps, further modulated by a shading map that measures how much each environment pixel contributes radiance to each Gaussian.
+          </p>
+          <p>
+            Finally, the relit Gaussians are merged into a single splatting model, which is used to render novel views of the object transplanted into the target scene.
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- Experiments (full-width at 90%) -->
+<!-- Experiments -->
 <section class="section">
-  <h2 class="title is-3 has-text-centered">Experiments</h2>
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Experiments</h2>
 
-  <figure class="image" style="width:90%; margin:0 auto 1.5rem auto;">
-    <img 
-      src="./static/images/Experiment.png" 
-      alt="TranSplat Experimental Results"
-      style="width:100%; height:auto; display:block;"
-    >
-    <figcaption class="has-text-centered" style="margin:0.5rem 0;">
-      Figure 2: Qualitative and quantitative results across synthetic and real-world scenes.
-    </figcaption>
-  </figure>
+        <figure class="image">
+          <img 
+            src="./static/images/Experiment.png" 
+            alt="TranSplat Experimental Results"
+          >
+          <figcaption class="has-text-centered">
+            Figure 2: Qualitative and quantitative results across synthetic and real-world scenes.
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
 </section>
+
 
 
 <section class="section">
