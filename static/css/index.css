@@ -113,7 +113,7 @@ body {
 .results-carousel {
   overflow: hidden;
 }
-/* 
+
 .results-carousel .item {
   margin: 5px;
   overflow: hidden;
@@ -125,27 +125,16 @@ body {
 
 .results-carousel video {
   margin: 0;
-} */
-
-/* 1) Force every item to be exactly 240px tall */
-.results-carousel .item {
-  height: 240px;
-  margin: 5px;
-  overflow: hidden;
-  border: 1px solid #bbb;
-  border-radius: 10px;
-  padding: 0;
-  font-size: 0;
-  display: flex;              /* center the video */
-  align-items: center;
-  justify-content: center;
 }
 
-/* 2) Make the video fill the item’s height, keep its aspect ratio */
-.results-carousel .item video {
-  height: 100%;
-  width: auto;
-  object-fit: cover;          /* or “contain” if you want letterboxing */
+
+/* index.css */
+
+.experiments-figure img {
+  max-width: 85%;    /* image will never exceed 75% of its container’s width */
+  height: auto;      /* preserves aspect ratio */
+  display: block;    /* lets margin: auto center it */
+  margin: 1rem auto; /* 1rem vertical spacing, auto horizontal centering */
 }
 
 
