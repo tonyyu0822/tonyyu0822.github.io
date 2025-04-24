@@ -191,7 +191,7 @@
       <div id="results-carousel" class="carousel results-carousel">
         <div class="item item-steve">
           <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/bikeScene_slider.mp4"
+            <source src="./static/videos/darkBench_slider.mp4"
                     type="video/mp4">
           </video>
         </div>
@@ -209,7 +209,7 @@
         </div>
         <div class="item item-fullbody">
           <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/darkBench_slider.mp4"
+            <source src="./static/videos/chairScene_slider.mp4"
                     type="video/mp4">
           </video>
         </div>
@@ -295,32 +295,40 @@
             <figcaption>Figure 1: Overview of the TranSplat pipeline.</figcaption>
           </figure>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Experiments -->
-<section class="section">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Experiments</h2>
-        <div class="content has-text-centered">
-          <figure class="image experiments-figure">
-            <img 
-              src="./static/images/Experiment.png" 
-              alt="TranSplat Experimental Results"
-            >
-            <figcaption>
-              Figure 2: Qualitative and quantitative results across synthetic and real-world scenes.
-            </figcaption>
-          </figure>
+        <div class="content has-text-justified">
+          <p>
+            <strong>(Top)</strong> TranSplat fits a Gaussian Surfels <sup>[10]</sup> model of the source scene (S) from input images and corresponding object masks. By optimizing per-Gaussian object labels, it extracts the object geometry (and normals) from S, and simultaneously estimates an environment map via a rendered cubemap centered around the object, leveraging the Gaussian radiance values in the fitted model.
+          </p>
+          <p>
+            <strong>(Bottom)</strong> TranSplat then fits a 3D Gaussian Splatting model to the target scene (T), and derives a second environment map based on the user-specified object location and scale within T. 
+          </p>
+          <p>
+            Using S and T’s environment maps along with the extracted object normals, we perform relighting by rescaling each Gaussian’s spherical harmonic (SH) appearance coefficients. Specifically, we multiply S’s SH coefficients by the per-coefficient ratio of T’s to S’s environment maps, further modulated by a shading map that measures how much each environment pixel contributes radiance to each Gaussian.
+          </p>
+          <p>
+            Finally, the relit Gaussians are merged into a single splatting model, which is used to render novel views of the object transplanted into the target scene.
+          </p>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+
+<!-- Experiments -->
+<section class="section">
+  <figure class="image" style="width:100%; margin:0;">
+    <img 
+      src="./static/images/Experiment.png" 
+      alt="TranSplat Experimental Results"
+      style="width:100%; height:auto; display:block;"
+    >
+    <figcaption class="has-text-centered mt-2">
+      Figure 2: Qualitative and quantitative results across synthetic and real-world scenes.
+    </figcaption>
+  </figure>
+</section>
+
 
 
 <section class="section">
