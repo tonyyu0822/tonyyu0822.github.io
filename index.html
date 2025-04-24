@@ -225,53 +225,52 @@
   </div>
 </section>
 
-
+<!-- Abstract -->
 <section class="section">
-  <div class="container is-max-desktop">
-    <!-- Abstract. -->
+  <div class="container is-max-widescreen">
     <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
+      <div class="column is-11-desktop">
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
             We present TranSplat, a 3D scene rendering algorithm that enables realistic cross-scene object transfer (from a source to a target scene) based on the Gaussian Splatting framework. Our approach addresses two critical challenges: (1) precise 3D object extraction from the source scene, and (2) faithful relighting of the transferred object in the target scene without explicit material property estimation.
           </p>
           <p>
-            TranSplat fits a splatting model to the source scene, using 2D object masks to drive fine-grained 3D segmentation. Following user‐guided insertion of the object into the target scene, along with automatic refinement of position and orientation, TranSplat derives per‐Gaussian radiance transfer functions via spherical harmonic analysis to adapt the object's appearance to match the target scene's lighting environment. This relighting strategy does not require explicitly estimating physical scene properties such as BRDFs.
+            TranSplat fits a splatting model to the source scene, using 2D object masks to drive fine-grained 3D segmentation. Following user-guided insertion of the object into the target scene, along with automatic refinement of position and orientation, TranSplat derives per-Gaussian radiance transfer functions via spherical harmonic analysis to adapt the object's appearance to match the target scene's lighting environment. This relighting strategy does not require explicitly estimating physical scene properties such as BRDFs.
           </p>
           <p>
-            Evaluated on several synthetic and real‐world scenes and objects, TranSplat yields excellent 3D object extractions and relighting performance compared to recent baseline methods and visually convincing cross-scene object transfers. Crucially, TranSplat does not compute any material properties, such as BRDFs, to perform relighting.
+            Evaluated on several synthetic and real-world scenes and objects, TranSplat yields excellent 3D object extractions and relighting performance compared to recent baseline methods and visually convincing cross-scene object transfers. Crucially, TranSplat does not compute any material properties, such as BRDFs, to perform relighting.
           </p>
         </div>
       </div>
     </div>
-    <!--/ Abstract. -->
   </div>
 </section>
 
 <!-- Motivation -->
 <section class="section">
-  <div class="container is-max-desktop">
+  <div class="container is-max-widescreen">
     <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
+      <div class="column is-11-desktop">
         <h2 class="title is-3">Motivation</h2>
         <div class="content has-text-justified">
           <p>
             The Gaussian Splatting (GS) framework represents a scene as optimizable Gaussian primitives, offering fast, differentiable rendering and semantic decomposition. Building on GS, recent methods enable interactive scene editing—recoloring objects or inserting new ones—by manipulating these primitives.
           </p>
           <p>
-            We tackle the fundamental task of transferring a 3D object from one scene to another with realistic relighting. This involves (1) extracting and aligning the object in 3D, and (2) removing source lighting effects and applying target‐scene illumination without estimating explicit material properties. To meet these challenges, we introduce TranSplat.
+            We tackle the fundamental task of transferring a 3D object from one scene to another with realistic relighting. This involves (1) extracting and aligning the object in 3D, and (2) removing source lighting effects and applying target-scene illumination without estimating explicit material properties. To meet these challenges, we introduce TranSplat.
           </p>
         </div>
       </div>
     </div>
   </div>
 </section>
+
 <!-- Method -->
 <section class="section">
-  <div class="container is-max-desktop">
+  <div class="container is-max-widescreen">
     <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
+      <div class="column is-11-desktop">
         <h2 class="title is-3">Method</h2>
 
         <figure class="image">
@@ -305,9 +304,9 @@
 
 <!-- Experiments -->
 <section class="section">
-  <div class="container is-max-desktop">
+  <div class="container is-max-widescreen">
     <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
+      <div class="column is-11-desktop">
         <h2 class="title is-3">Experiments</h2>
 
         <figure class="image">
