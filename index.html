@@ -279,18 +279,6 @@
         </figure>
 
         <div class="content has-text-justified">
-          <p>
-            <strong>(Top)</strong> TranSplat fits a Gaussian Surfels <sup>[10]</sup> model of the source scene (S) from input images and corresponding object masks. By optimizing per-Gaussian object labels, it extracts the object geometry (and normals) from S, and simultaneously estimates an environment map via a rendered cubemap centered around the object, leveraging the Gaussian radiance values in the fitted model.
-          </p>
-          <p>
-            <strong>(Bottom)</strong> TranSplat then fits a 3D Gaussian Splatting model to the target scene (T), and derives a second environment map based on the user-specified object location and scale within T.
-          </p>
-          <p>
-            Using S and T’s environment maps along with the extracted object normals, we perform relighting by rescaling each Gaussian’s spherical harmonic (SH) appearance coefficients. Specifically, we multiply S’s SH coefficients by the per-coefficient ratio of T’s to S’s environment maps, further modulated by a shading map that measures how much each environment pixel contributes radiance to each Gaussian.
-          </p>
-          <p>
-            Finally, the relit Gaussians are merged into a single splatting model, which is used to render novel views of the object transplanted into the target scene.
-          </p>
         </div>
       </div>
     </div>
@@ -320,6 +308,7 @@
 
 
 
+
 <section class="section">
   <div class="container is-max-desktop">
 
@@ -339,6 +328,65 @@
           </video>
         </div>
       </div>
+      <!--/ Visual Effects. -->
+
+      <!-- Matting. -->
+      <div class="column">
+        <h2 class="title is-3">Matting</h2>
+        <div class="columns is-centered">
+          <div class="column content">
+            <p>
+              As a byproduct of our method, we can also solve the matting problem by ignoring
+              samples that fall outside of a bounding box during rendering.
+            </p>
+            <video id="matting-video" controls playsinline height="100%">
+              <source src="./static/videos/matting.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!--/ Matting. -->
+
+    <!-- Animation. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Animation</h2>
+
+        <!-- Interpolating. -->
+        <h3 class="title is-4">Interpolating states</h3>
+        <div class="content has-text-justified">
+          <p>
+            We can also animate the scene by interpolating the deformation latent codes of two input
+            frames. Use the slider here to linearly interpolate between the left frame and the right
+            frame.
+          </p>
+        </div>
+        <div class="columns is-vcentered interpolation-panel">
+          <div class="column is-3 has-text-centered">
+            <img src="./static/images/interpolate_start.jpg"
+                 class="interpolation-image"
+                 alt="Interpolate start reference image."/>
+            <p>Start Frame</p>
+          </div>
+          <div class="column interpolation-video-column">
+            <div id="interpolation-image-wrapper">
+              Loading...
+            </div>
+            <input class="slider is-fullwidth is-large is-info"
+                   id="interpolation-slider"
+                   step="1" min="0" max="100" value="0" type="range">
+          </div>
+          <div class="column is-3 has-text-centered">
+            <img src="./static/images/interpolate_end.jpg"
+                 class="interpolation-image"
+                 alt="Interpolation end reference image."/>
+            <p class="is-bold">End Frame</p>
+          </div>
+        </div>
+        <br/>
         <!--/ Interpolating. -->
 
         <!-- Re-rendering. -->
@@ -366,9 +414,6 @@
     </div>
     <!--/ Animation. -->
 
-  </div>
-</section>
-
 
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
@@ -385,38 +430,6 @@
   </div>
 </section>
 
-
-<footer class="footer">
-  <div class="container">
-    <div class="content has-text-centered">
-      <a class="icon-link"
-         href="./static/videos/nerfies_paper.pdf">
-        <i class="fas fa-file-pdf"></i>
-      </a>
-      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
-        <i class="fab fa-github"></i>
-      </a>
-    </div>
-    <div class="columns is-centered">
-      <div class="column is-8">
-        <div class="content">
-          <p>
-            This website is licensed under a <a rel="license"
-                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
-            Commons Attribution-ShareAlike 4.0 International License</a>.
-          </p>
-          <p>
-            This means you are free to borrow the <a
-              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
-            we just ask that you link back to this page in the footer.
-            Please remember to remove the analytics code included in the header of the website which
-            you do not want on your website.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</footer>
 
 </body>
 </html>
