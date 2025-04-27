@@ -1,9 +1,14 @@
+// ─── index.js ───
+
+// prevent VideoJS nag
 window.HELP_IMPROVE_VIDEOJS = false;
 
+// ─── Interpolation Globals ───
 var INTERP_BASE       = "./static/interpolation/stacked";
 var NUM_INTERP_FRAMES = 197;
 var interp_images     = [];
 
+/** Preload the current INTERP_BASE sequence into memory */
 function preloadInterpolationImages() {
   interp_images = [];
   for (var i = 0; i < NUM_INTERP_FRAMES; i++) {
@@ -13,6 +18,7 @@ function preloadInterpolationImages() {
   }
 }
 
+/** Display frame idx from interp_images[] */
 function setInterpolationImage(idx) {
   var img = interp_images[idx];
   img.ondragstart   = () => false;
@@ -23,18 +29,35 @@ function setInterpolationImage(idx) {
 }
 
 $(document).ready(function() {
-  // initial load
+  // ─── Navbar burger toggle ───
+  $(".navbar-burger").click(function() {
+    $(".navbar-burger").toggleClass("is-active");
+    $(".navbar-menu").toggleClass("is-active");
+  });
+
+  // ─── Results Carousel ───
+  if (window.bulmaCarousel) {
+    bulmaCarousel.attach("#results-carousel", {
+      slidesToScroll: 1,
+      slidesToShow:   3,
+      loop:           true,
+      infinite:       true,
+      autoplay:       false,
+      autoplaySpeed:  3000,
+    });
+  }
+
+  // ─── Interpolation Slider Init ───
   preloadInterpolationImages();
   setInterpolationImage(0);
-  $("#interpolation-slider")
-    .prop("max", NUM_INTERP_FRAMES - 1);
+  $("#interpolation-slider").prop("max", NUM_INTERP_FRAMES - 1);
 
-  // slider moves
+  // slider → frame
   $("#interpolation-slider").on("input", function() {
     setInterpolationImage(this.value);
   });
 
-  // env-map button clicks
+  // env-map button clicks → swap sequence & update target envmap
   $(".env-button").on("click", function() {
     INTERP_BASE       = $(this).data("base");
     NUM_INTERP_FRAMES = parseInt($(this).data("frames"), 10);
@@ -45,10 +68,11 @@ $(document).ready(function() {
       .val(0);
     setInterpolationImage(0);
 
-    // swap the city thumb to match the clicked one (optional)
-    $("#source-envmap")
-      .attr("src", $(this).attr("src"));
+    // update the *target* envmap and its label, keep source static
+    $("#target-envmap").attr("src", $(this).attr("src"));
+    $("#target-envmap-label").text($(this).next("p").text());
   });
 
+  // ─── Bulma-Slider attach (for any .slider) ───
   if (window.bulmaSlider) bulmaSlider.attach();
 });

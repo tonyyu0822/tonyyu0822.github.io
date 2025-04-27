@@ -308,98 +308,114 @@
 
 <!-- ─── INTERPOLATION SECTION ─── -->
 <style>
-  /* keep all interpolation images/thumbs fitting their containers */
+  /* ensure all interpolation images/thumbs fit */
   .interpolation-image {
     max-width: 100%;
     height: auto;
     display: block;
     margin: 0 auto;
   }
-  /* small fixed size for the top env-map buttons */
+  /* larger buttons up top */
   .envmap-selectors .column img {
-    max-width: 80px;
+    max-width: 120px;
     cursor: pointer;
+  }
+  /* source/target env-map size in slider panel */
+  #source-envmap,
+  #target-envmap {
+    max-width: 180px;
   }
 </style>
 
 <section class="section">
   <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-full-width">
 
-        <h2 class="title is-3">Animation</h2>
-        <h3 class="title is-4">Interpolating states</h3>
-        <div class="content has-text-justified">
-          <p>
-            We can animate the scene by interpolating the deformation latent codes of two input frames.
-            Use the slider below to interpolate linearly between the left and right frames.
-          </p>
-        </div>
+    <h2 class="title is-3">Animation</h2>
+    <h3 class="title is-4">Interpolating states</h3>
+    <div class="content has-text-justified">
+      <p>
+        We can animate the scene by interpolating the deformation latent codes of two input frames.
+        Use the slider below to interpolate linearly between the left and right frames.
+      </p>
+    </div>
 
-        <!-- 1) ENV-MAP SELECTORS (above slider) -->
-        <div class="columns is-centered envmap-selectors">
-          <div class="column is-2 has-text-centered">
-            <img
-              src="./static/images/envmaps/fireplace.jpg"
-              class="env-button interpolation-image"
-              data-base="./static/interpolation/fireplace"
-              data-frames="197"
-              alt="Fireplace Env Map"
-            />
-            <p>Fireplace</p>
-          </div>
-          <div class="column is-2 has-text-centered">
-            <img
-              src="./static/images/envmaps/sunset.jpg"
-              class="env-button interpolation-image"
-              data-base="./static/interpolation/sunset"
-              data-frames="197"
-              alt="Sunset Env Map"
-            />
-            <p>Sunset</p>
-          </div>
-          <div class="column is-2 has-text-centered">
-            <img
-              src="./static/images/envmaps/forest.jpg"
-              class="env-button interpolation-image"
-              data-base="./static/interpolation/forest"
-              data-frames="197"
-              alt="Forest Env Map"
-            />
-            <p>Forest</p>
-          </div>
-        </div>
-
-        <!-- 2) SLIDER + SOURCE ENV-MAP -->
-        <div class="columns is-vcentered interpolation-panel">
-          <div class="column is-3 has-text-centered">
-            <img
-              id="source-envmap"
-              src="./static/images/envmaps/city.jpg"
-              class="interpolation-image"
-              alt="Source environment."
-            />
-            <p>Source Env Map: City</p>
-          </div>
-
-          <div class="column is-9 interpolation-video-column">
-            <div id="interpolation-image-wrapper">Loading…</div>
-            <input
-              id="interpolation-slider"
-              class="slider is-fullwidth is-large is-info"
-              type="range"
-              step="1"
-              min="0"
-              max="196"
-              value="0"
-            />
-          </div>
-        </div>
-
+    <!-- 1) ENV-MAP SELECTORS -->
+    <div class="columns is-centered envmap-selectors">
+      <div class="column is-2 has-text-centered">
+        <img
+          src="./static/images/envmaps/fireplace.jpg"
+          class="env-button interpolation-image"
+          data-base="./static/interpolation/fireplace"
+          data-frames="197"
+          alt="Fireplace Env Map"
+        />
+        <p>Fireplace</p>
+      </div>
+      <div class="column is-2 has-text-centered">
+        <img
+          src="./static/images/envmaps/sunset.jpg"
+          class="env-button interpolation-image"
+          data-base="./static/interpolation/sunset"
+          data-frames="197"
+          alt="Sunset Env Map"
+        />
+        <p>Sunset</p>
+      </div>
+      <div class="column is-2 has-text-centered">
+        <img
+          src="./static/images/envmaps/forest.jpg"
+          class="env-button interpolation-image"
+          data-base="./static/interpolation/forest"
+          data-frames="197"
+          alt="Forest Env Map"
+        />
+        <p>Forest</p>
       </div>
     </div>
+
+    <!-- 2) SLIDER + SOURCE & TARGET ENV-MAPS -->
+    <div class="columns is-vcentered interpolation-panel">
+      <!-- source stays fixed -->
+      <div class="column is-3 has-text-centered">
+        <img
+          id="source-envmap"
+          src="./static/images/envmaps/city.jpg"
+          class="interpolation-image"
+          alt="Source Env Map: City"
+        />
+        <p>Source Env Map: City</p>
+      </div>
+
+      <!-- slider in middle -->
+      <div class="column is-6 interpolation-video-column">
+        <div id="interpolation-image-wrapper">Loading…</div>
+        <input
+          id="interpolation-slider"
+          class="slider is-fullwidth is-large is-info"
+          type="range"
+          step="1"
+          min="0"
+          max="196"
+          value="0"
+        />
+      </div>
+
+      <!-- target updates on click -->
+      <div class="column is-3 has-text-centered">
+        <img
+          id="target-envmap"
+          src="./static/images/envmaps/fireplace.jpg"
+          class="interpolation-image"
+          alt="Target Env Map"
+        />
+        <p id="target-envmap-label">Target Env Map</p>
+      </div>
+    </div>
+
   </div>
 </section>
+
+
 
 
 <section class="section" id="BibTeX">
