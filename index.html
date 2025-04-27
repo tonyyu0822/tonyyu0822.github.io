@@ -305,41 +305,53 @@
     </div>
   </div>
 </section>
-
 <!-- ─── INTERPOLATION SECTION ─── -->
 <style>
-  /* ensure all interpolation images/thumbs fit */
-  .interpolation-image {
+  /* make the whole section half the viewport height */
+  .interpolation-section {
+    min-height: 50vh;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+
+  /* enlarge all interpolation images/thumbs */
+  .interpolation-section .interpolation-image {
     max-width: 100%;
     height: auto;
     display: block;
     margin: 0 auto;
   }
-  /* larger buttons up top */
-  .envmap-selectors .column img {
-    max-width: 120px;
+
+  /* top env-map buttons bigger */
+  .interpolation-section .envmap-selectors .column img {
+    max-width: 180px;
     cursor: pointer;
   }
-  /* source/target env-map size in slider panel */
-  #source-envmap,
-  #target-envmap {
-    max-width: 180px;
+
+  /* source/target env-map in slider panel bigger */
+  .interpolation-section #source-envmap,
+  .interpolation-section #target-envmap {
+    max-width: 240px;
+  }
+
+  /* make the slider itself taller */
+  .interpolation-section .slider {
+    height: 1.5rem;
   }
 </style>
 
-<section class="section">
+<section class="section interpolation-section">
   <div class="container is-max-desktop">
 
-    <h2 class="title is-3">Animation</h2>
+    <h2 class="title is-3">Relighting Results</h2>
     <h3 class="title is-4">Interpolating states</h3>
     <div class="content has-text-justified">
       <p>
-        We can animate the scene by interpolating the deformation latent codes of two input frames.
-        Use the slider below to interpolate linearly between the left and right frames.
+        Novel views of the relighting results on TensoIR dataset across different environment maps.
       </p>
     </div>
 
-    <!-- 1) ENV-MAP SELECTORS -->
+    <!-- 1) ENV-MAP SELECTORS (larger buttons) -->
     <div class="columns is-centered envmap-selectors">
       <div class="column is-2 has-text-centered">
         <img
@@ -373,9 +385,9 @@
       </div>
     </div>
 
-    <!-- 2) SLIDER + SOURCE & TARGET ENV-MAPS -->
+    <!-- 2) SLIDER + SOURCE & TARGET ENV-MAPS (enlarged) -->
     <div class="columns is-vcentered interpolation-panel">
-      <!-- source stays fixed -->
+      <!-- source fixed -->
       <div class="column is-3 has-text-centered">
         <img
           id="source-envmap"
@@ -386,7 +398,7 @@
         <p>Source Env Map: City</p>
       </div>
 
-      <!-- slider in middle -->
+      <!-- slider enlarged -->
       <div class="column is-6 interpolation-video-column">
         <div id="interpolation-image-wrapper">Loading…</div>
         <input
@@ -414,6 +426,7 @@
 
   </div>
 </section>
+
 
 
 
