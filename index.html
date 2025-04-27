@@ -204,7 +204,7 @@
         </div>
         <div class="item item-fullbody">
           <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/chairScene_bunny_slider.mp4.mp4"
+            <source src="./static/videos/chairScene_bunny_slider.mp4"
                     type="video/mp4">
           </video>
         </div>
@@ -307,44 +307,91 @@
 </section>
 
 
-
-
+<!-- ─── INTERPOLATION SECTION ─── -->
 <section class="section">
   <div class="container is-max-desktop">
-    <div class="columns is-centered interpolation-panel">
-      <!-- 1) Source on the left -->
-      <div class="column is-3 has-text-centered">
-        <img src="./static/images/envmaps/city.jpg"
-             class="interpolation-image"
-             alt="Source environment." />
-        <p>Source Env Map City</p>
-      </div>
+    <div class="columns is-centered">
+      <div class="column is-full-width">
 
-      <!-- 2) Big right column: target on top, slider below -->
-      <div class="column is-9">
-        <div class="columns is-multiline is-vcentered">
-          <!-- Target envmap above -->
-          <div class="column is-full has-text-centered">
-            <img src="./static/images/envmaps/sunset.jpg"
-                 class="interpolation-image"
-                 alt="Target environment." />
-            <p class="is-bold">Target Envmap</p>
+        <h2 class="title is-3">Animation</h2>
+        <h3 class="title is-4">Interpolating states</h3>
+        <div class="content has-text-justified">
+          <p>
+            We can also animate the scene by interpolating the deformation latent codes of two input
+            frames. Use the slider below to linearly interpolate between the left frame and the right
+            frame.
+          </p>
+        </div>
+
+        <!-- 1) ENV-MAP SELECTORS (above slider) -->
+        <div class="columns is-centered envmap-selectors">
+          <!-- ── Fireplace ── -->
+          <div class="column is-2 has-text-centered">
+            <img
+              src="./static/images/envmaps/fireplace.jpg"    <!-- ← thumbnail for button -->
+              class="env-button interpolation-image"
+              data-base="./static/interpolation/fireplace"         <!-- ← your fireplace folder -->
+              data-frames="197"                                    <!-- ← frame count in that folder -->
+              alt="Fireplace Env Map"
+            />
+            <p>Fireplace</p>
           </div>
-          <!-- Interpolator below, full width -->
-          <div class="column is-full interpolation-video-column">
-            <div id="interpolation-image-wrapper">Loading...</div>
-            <input class="slider is-fullwidth is-large is-info"
-                   id="interpolation-slider"
-                   type="range"
-                   min="0" max="593"
-                   step="1" value="0">
+
+          <!-- ── Sunset ── -->
+          <div class="column is-2 has-text-centered">
+            <img
+              src="./static/images/envmaps/sunset.jpg"
+              class="env-button interpolation-image"
+              data-base="./static/interpolation/sunset"
+              data-frames="197"
+              alt="Sunset Env Map"
+            />
+            <p>Sunset</p>
+          </div>
+
+          <!-- ── Forest ── -->
+          <div class="column is-2 has-text-centered">
+            <img
+              src="./static/images/envmaps/forest.jpg"
+              class="env-button interpolation-image"
+              data-base="./static/interpolation/forest"
+              data-frames="197"
+              alt="Forest Env Map"
+            />
+            <p>Forest</p>
           </div>
         </div>
+
+        <!-- 2) SLIDER + SOURCE ENV-MAP (full width) -->
+        <div class="columns is-vcentered interpolation-panel">
+          <div class="column is-full has-text-centered">
+            <img
+              id="source-envmap"
+              src="./static/images/envmaps/city.jpg"              <!-- ← source envmap thumbnail -->
+              class="interpolation-image"
+              alt="Source environment."
+            />
+            <p>Source Env Map: City</p>
+          </div>
+
+          <div class="column interpolation-video-column">
+            <div id="interpolation-image-wrapper">Loading...</div>
+            <input
+              class="slider is-fullwidth is-large is-info"
+              id="interpolation-slider"
+              type="range"
+              step="1"
+              min="0"
+              max="196"             <!-- ← NUM_FRAMES – 1 for your default folder -->
+              value="0"
+            />
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
 </section>
-
 
 
 <section class="section" id="BibTeX">
