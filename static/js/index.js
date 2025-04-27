@@ -1,11 +1,8 @@
-// ─── INTERPOLATION SLIDER SCRIPT ───
 window.HELP_IMPROVE_VIDEOJS = false;
 
-// default folder & frame count (will be overridden on click)
 var INTERP_BASE       = "./static/interpolation/stacked";
 var NUM_INTERP_FRAMES = 197;
-
-var interp_images = [];
+var interp_images     = [];
 
 function preloadInterpolationImages() {
   interp_images = [];
@@ -26,39 +23,32 @@ function setInterpolationImage(idx) {
 }
 
 $(document).ready(function() {
-  // 1) initial load
+  // initial load
   preloadInterpolationImages();
   setInterpolationImage(0);
   $("#interpolation-slider")
     .prop("max", NUM_INTERP_FRAMES - 1);
 
-  // 2) slider moves
+  // slider moves
   $("#interpolation-slider").on("input", function() {
     setInterpolationImage(this.value);
   });
 
-  // 3) env-map button clicks
+  // env-map button clicks
   $(".env-button").on("click", function() {
-    // grab new folder & frame count
     INTERP_BASE       = $(this).data("base");
     NUM_INTERP_FRAMES = parseInt($(this).data("frames"), 10);
 
-    // reload frames
     preloadInterpolationImages();
-
-    // reset slider range & thumb
     $("#interpolation-slider")
       .prop("max", NUM_INTERP_FRAMES - 1)
       .val(0);
-
-    // draw first frame
     setInterpolationImage(0);
 
-    // optional: swap the source-envmap thumbnail to match
+    // swap the city thumb to match the clicked one (optional)
     $("#source-envmap")
-      .attr("src", $(this).attr("src").replace("_thumb", ""));
+      .attr("src", $(this).attr("src"));
   });
 
-  // reattach bulmaSlider if you need it elsewhere
   if (window.bulmaSlider) bulmaSlider.attach();
 });
