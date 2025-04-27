@@ -285,6 +285,130 @@
   </div>
 </section>
 
+<!-- ─── INTERPOLATION SECTION ─── -->
+<style>
+  /* full-width & taller */
+  .interpolation-section {
+    padding: 2rem 0;
+    min-height: 60vh;
+  }
+  /* override Bulma container to be fluid here */
+  .interpolation-section .container {
+    max-width: 95vw;
+  }
+
+  /* SPACE & SIZE for the top env-map buttons */
+  .interpolation-section .envmap-selectors .column {
+    margin: 0 1.5rem;
+    flex: none;
+  }
+  .interpolation-section .envmap-selectors .column img {
+    max-width: 260px;
+    cursor: pointer;
+  }
+
+  /* BIGGER source/target thumbs */
+  .interpolation-section #source-envmap,
+  .interpolation-section #target-envmap {
+    max-width: 260px;
+  }
+
+  /* a slightly taller slider */
+  .interpolation-section .slider {
+    height: 1.8rem;
+  }
+</style>
+
+<section class="section interpolation-section">
+  <div class="container is-fluid">
+
+    <h2 class="title is-3">Relighting Results</h2>
+    <h3 class="title is-4">Interpolating states</h3>
+    <div class="content has-text-justified">
+      <p>
+        Novel views of the relighting results on TensoIR dataset across different environment maps.
+      </p>
+    </div>
+
+    <!-- 1) BIG ENV-MAP SELECTORS -->
+    <div class="columns is-centered envmap-selectors">
+      <div class="column is-narrow has-text-centered">
+        <img
+          src="./static/images/envmaps/fireplace.jpg"
+          class="env-button interpolation-image"
+          data-base="./static/interpolation/fireplace"
+          data-frames="197"
+          alt="Fireplace Env Map"
+        />
+        <p>Fireplace</p>
+      </div>
+      <div class="column is-narrow has-text-centered">
+        <img
+          src="./static/images/envmaps/sunset.jpg"
+          class="env-button interpolation-image"
+          data-base="./static/interpolation/sunset"
+          data-frames="197"
+          alt="Sunset Env Map"
+        />
+        <p>Sunset</p>
+      </div>
+      <div class="column is-narrow has-text-centered">
+        <img
+          src="./static/images/envmaps/forest.jpg"
+          class="env-button interpolation-image"
+          data-base="./static/interpolation/stacked"
+          data-frames="197"
+          alt="Forest Env Map"
+        />
+        <p>Forest</p>
+      </div>
+    </div>
+
+    <!-- 2) WIDE SLIDER PANEL -->
+    <div class="columns is-vcentered interpolation-panel">
+      <!-- source fixed -->
+      <div class="column is-3 has-text-centered">
+        <img
+          id="source-envmap"
+          src="./static/images/envmaps/city.jpg"
+          class="interpolation-image"
+          alt="Source Env Map: City"
+        />
+        <p>Source Env Map: City</p>
+      </div>
+
+      <!-- big centered slider -->
+      <div class="column is-6 interpolation-video-column">
+        <div id="interpolation-image-wrapper">Loading…</div>
+        <input
+          id="interpolation-slider"
+          class="slider is-fullwidth is-large is-info"
+          type="range"
+          step="1"
+          min="0"
+          max="196"
+          value="0"
+        />
+      </div>
+
+      <!-- target swaps on click -->
+      <div class="column is-3 has-text-centered">
+        <img
+          id="target-envmap"
+          src="./static/images/envmaps/fireplace.jpg"
+          class="interpolation-image"
+          alt="Target Env Map"
+        />
+        <p id="target-envmap-label">Target Env Map</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+
 <!-- Experiments -->
 <section class="section">
   <div class="container is-max-widescreen">
@@ -305,130 +429,6 @@
     </div>
   </div>
 </section>
-<!-- ─── INTERPOLATION SECTION ─── -->
-<style>
-  /* make the whole section half the viewport height */
-  .interpolation-section {
-    min-height: 50vh;
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
-  }
-
-  /* enlarge all interpolation images/thumbs */
-  .interpolation-section .interpolation-image {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-  }
-
-  /* top env-map buttons bigger */
-  .interpolation-section .envmap-selectors .column img {
-    max-width: 180px;
-    cursor: pointer;
-  }
-
-  /* source/target env-map in slider panel bigger */
-  .interpolation-section #source-envmap,
-  .interpolation-section #target-envmap {
-    max-width: 240px;
-  }
-
-  /* make the slider itself taller */
-  .interpolation-section .slider {
-    height: 1.5rem;
-  }
-</style>
-
-<section class="section interpolation-section">
-  <div class="container is-max-desktop">
-
-    <h2 class="title is-3">Relighting Results</h2>
-    <h3 class="title is-4">Interpolating states</h3>
-    <div class="content has-text-justified">
-      <p>
-        Novel views of the relighting results on TensoIR dataset across different environment maps.
-      </p>
-    </div>
-
-    <!-- 1) ENV-MAP SELECTORS (larger buttons) -->
-    <div class="columns is-centered envmap-selectors">
-      <div class="column is-2 has-text-centered">
-        <img
-          src="./static/images/envmaps/fireplace.jpg"
-          class="env-button interpolation-image"
-          data-base="./static/interpolation/fireplace"
-          data-frames="197"
-          alt="Fireplace Env Map"
-        />
-        <p>Fireplace</p>
-      </div>
-      <div class="column is-2 has-text-centered">
-        <img
-          src="./static/images/envmaps/sunset.jpg"
-          class="env-button interpolation-image"
-          data-base="./static/interpolation/sunset"
-          data-frames="197"
-          alt="Sunset Env Map"
-        />
-        <p>Sunset</p>
-      </div>
-      <div class="column is-2 has-text-centered">
-        <img
-          src="./static/images/envmaps/forest.jpg"
-          class="env-button interpolation-image"
-          data-base="./static/interpolation/stacked"
-          data-frames="197"
-          alt="Forest Env Map"
-        />
-        <p>Forest</p>
-      </div>
-    </div>
-
-    <!-- 2) SLIDER + SOURCE & TARGET ENV-MAPS (enlarged) -->
-    <div class="columns is-vcentered interpolation-panel">
-      <!-- source fixed -->
-      <div class="column is-3 has-text-centered">
-        <img
-          id="source-envmap"
-          src="./static/images/envmaps/city.jpg"
-          class="interpolation-image"
-          alt="Source Env Map: City"
-        />
-        <p>Source Env Map: City</p>
-      </div>
-
-      <!-- slider enlarged -->
-      <div class="column is-6 interpolation-video-column">
-        <div id="interpolation-image-wrapper">Loading…</div>
-        <input
-          id="interpolation-slider"
-          class="slider is-fullwidth is-large is-info"
-          type="range"
-          step="1"
-          min="0"
-          max="196"
-          value="0"
-        />
-      </div>
-
-      <!-- target updates on click -->
-      <div class="column is-3 has-text-centered">
-        <img
-          id="target-envmap"
-          src="./static/images/envmaps/fireplace.jpg"
-          class="interpolation-image"
-          alt="Target Env Map"
-        />
-        <p id="target-envmap-label">Target Env Map</p>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-
-
 
 
 <section class="section" id="BibTeX">
