@@ -182,7 +182,7 @@ h1 {
   margin: 20px auto;
   border-radius: 20px;
   overflow: hidden;
-  aspect-ratio: 7 / 5;
+  aspect-ratio: 7 / 5; /* force ratio and heght */
 }
 
 .image-comparison img {
@@ -191,7 +191,7 @@ h1 {
   object-fit: cover;
   object-position: left;
 }
-
+/*todo： slider not at 50% */
 .image-comparison .images-container {
   position: relative;
   display: flex;
