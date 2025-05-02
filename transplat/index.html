@@ -447,6 +447,15 @@
   .interpolation-section .slider {
     height: 1.8rem;
   }
+
+  /* Hover effect for envmap images */
+  .envmap-img:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
 </style>
 
 <section class="section interpolation-section">
@@ -460,35 +469,35 @@
     </div>
 
     <!-- 1) BIG ENV-MAP SELECTORS -->
-    <div class="columns is-centered envmap-selectors">
-      <div class="column is-narrow has-text-centered">
+    <div class="columns is-centered is-flex">
+      <div class="column has-text-centered" style="flex: 1 1 33%; max-width: 33%; padding: 10px;">
         <img
           src="./static/images/envmaps/fireplace.jpg"
-          class="env-button interpolation-image"
+          class="env-button interpolation-image envmap-img"
           data-base="./static/interpolation/fireplace"
           data-frames="197"
           alt="Fireplace Env Map"
-        />
+          style="width: 100%; height: auto; border-radius: 10px;" />
         <p>Fireplace</p>
       </div>
-      <div class="column is-narrow has-text-centered">
+      <div class="column has-text-centered" style="flex: 1 1 33%; max-width: 33%; padding: 10px;">
         <img
           src="./static/images/envmaps/sunset.jpg"
-          class="env-button interpolation-image"
+          class="env-button interpolation-image envmap-img"
           data-base="./static/interpolation/sunset"
           data-frames="197"
           alt="Sunset Env Map"
-        />
+          style="width: 100%; height: auto; border-radius: 10px;" />
         <p>Sunset</p>
       </div>
-      <div class="column is-narrow has-text-centered">
+      <div class="column has-text-centered" style="flex: 1 1 33%; max-width: 33%; padding: 10px;">
         <img
           src="./static/images/envmaps/forest.jpg"
-          class="env-button interpolation-image"
+          class="env-button interpolation-image envmap-img"
           data-base="./static/interpolation/stacked"
           data-frames="197"
           alt="Forest Env Map"
-        />
+          style="width: 100%; height: auto; border-radius: 10px;" />
         <p>Forest</p>
       </div>
     </div>
