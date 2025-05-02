@@ -4,8 +4,9 @@
 window.HELP_IMPROVE_VIDEOJS = false;
 
 // ─── Interpolation Globals ───
-// default to fireplace instead of stacked
-var INTERP_BASE       = "./static/interpolation/fireplace";
+// we'll use this as our “default” on startup
+var DEFAULT_BASE      = "./static/interpolation/fireplace";
+var INTERP_BASE       = DEFAULT_BASE;
 var NUM_INTERP_FRAMES = 197;
 var interp_images     = [];
 
@@ -48,21 +49,12 @@ $(document).ready(function() {
     });
   }
 
-  // ─── Interpolation Slider Init ───
-  preloadInterpolationImages();
-  setInterpolationImage(0);
-  $("#interpolation-slider").prop("max", NUM_INTERP_FRAMES - 1);
-
-  // initialize the target thumbnail & label to Fireplace
-  $("#target-envmap").attr("src", "./static/images/envmaps/fireplace.jpg");
-  $("#target-envmap-label").text("Fireplace");
-
-  // slider → frame
+  // ─── Slider input handler (no preload here) ───
   $("#interpolation-slider").on("input", function() {
     setInterpolationImage(this.value);
   });
 
-  // env-map button clicks → swap sequence & update target envmap
+  // ─── Env‑map button clicks ───
   $(".env-button").on("click", function() {
     INTERP_BASE       = $(this).data("base");
     NUM_INTERP_FRAMES = parseInt($(this).data("frames"), 10);
@@ -73,11 +65,20 @@ $(document).ready(function() {
       .val(0);
     setInterpolationImage(0);
 
-    // update only the target envmap and its label
+    // update only the *target* envmap and its label
     $("#target-envmap").attr("src", $(this).attr("src"));
-    $("#target-envmap-label").text($(this).next("p").text());
+    $("#target-envmap-label")
+      .text($(this).next("p").text());
   });
 
-  // ─── Bulma-Slider attach (for any .slider) ───
+  // ─── Now *simulate* a click on the fireplace button ───
+  // this will do exactly what your click‑handler does:
+  $(".env-button")
+    .filter(function() {
+      return $(this).data("base") === DEFAULT_BASE;
+    })
+    .trigger("click");
+
+  // ─── Bulma‑Slider attach (for any .slider) ───
   if (window.bulmaSlider) bulmaSlider.attach();
 });
