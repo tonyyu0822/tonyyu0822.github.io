@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content=" 3D scene rendering algorithm that enables realistic cross-scene object transfer (from a source to a target scene) based on the Gaussian Splatting framework. Our approach addresses two critical challenges: (1) precise 3D object extraction from the source scene, and (2) faithful relighting of the transferred object in the target scene without explicit material property estimation.">
+  <meta name="keywords" content="TranSplat, Relight, 3D Rendering">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TranSplat: Lighting-Consistent Cross-Scene Object Transfer with 3D Gaussian Splatting</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://keunhong.com">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://hypernerf.github.io">
+            HyperNeRF
+          </a>
+          <a class="navbar-item" href="https://nerfies.github.io">
+            Nerfies
+          </a>
+          <a class="navbar-item" href="https://latentfusion.github.io">
+            LatentFusion
+          </a>
+          <a class="navbar-item" href="https://photoshape.github.io">
+            PhotoShape
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">TranSplat: Lighting-Consistent
+            Cross-Scene Object Transfer with 3D Gaussian Splatting</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://tonyyu0822.github.io">Boyang (Tony) Yu</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://utkarshsinha.com">Yanlin Jin</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://computationalimaging.rice.edu/team/ashok-veeraraghavan/">Ashok Veeraraghavan</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://akshatdave.github.io/">Akshat Dave</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.guhabalakrishnan.com/">Guha Balakrishnan</a><sup>1</sup>,
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Rice University,</span>
+            <span class="author-block"><sup>2</sup>Massachusetts Institute of Technology</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2503.22676"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2503.22676"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video (coming soon) -->
+              <span class="link-block">
+                <a class="external-link button is-normal is-rounded is-light" disabled>
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video (Coming Soon)</span>
+                </a>
+              </span>
+
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/google/nerfies"
+                   class="external-link button is-normal is-rounded is-dark"disabled>
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code(Coming Soon)</span>
+                  </a>
+              </span>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <div class="video-container" style="display: flex; justify-content: center; align-items: center; gap: 20px;">
+        <video id="teaser1" autoplay muted loop playsinline height="100%">
+          <source src="./static/videos/originalvs gsir.mp4" type="video/mp4">
+        </video>
+        <video id="teaser2" autoplay muted loop playsinline height="100%">
+          <source src="./static/videos/Transplat Roating comparison.mp4" type="video/mp4">
+        </video>
+      </div>
+      <h2 class="subtitle has-text-centered">
+        <span class="dnerf">Transplat relighting on synthetic TensoIR dataset</span>
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-steve">
+          <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/darkBench_slider.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-chair-tp">
+          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/chairScene_slider.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-shiba">
+          <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/darkBench_ficus_lego_slider.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-fullbody">
+          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/chairScene_bunny_slider.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-blueshirt">
+          <video poster="" id="blueshirt" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/roomScene_slider.mp4"
+                    type="video/mp4">
+          </video>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Abstract -->
+<section class="section">
+  <div class="container is-max-widescreen">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-11-desktop">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            We present TranSplat, a 3D scene rendering algorithm that enables realistic cross-scene object transfer (from a source to a target scene) based on the Gaussian Splatting framework. Our approach addresses two critical challenges: (1) precise 3D object extraction from the source scene, and (2) faithful relighting of the transferred object in the target scene without explicit material property estimation.
+          </p>
+          <p>
+            TranSplat fits a splatting model to the source scene, using 2D object masks to drive fine-grained 3D segmentation. Following user-guided insertion of the object into the target scene, along with automatic refinement of position and orientation, TranSplat derives per-Gaussian radiance transfer functions via spherical harmonic analysis to adapt the object's appearance to match the target scene's lighting environment. This relighting strategy does not require explicitly estimating physical scene properties such as BRDFs.
+          </p>
+          <p>
+            Evaluated on several synthetic and real-world scenes and objects, TranSplat yields excellent 3D object extractions and relighting performance compared to recent baseline methods and visually convincing cross-scene object transfers. Crucially, TranSplat does not compute any material properties, such as BRDFs, to perform relighting.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Motivation -->
+<section class="section">
+  <div class="container is-max-widescreen">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-11-desktop">
+        <h2 class="title is-3">Motivation</h2>
+        <div class="content has-text-justified">
+          <p>
+            The Gaussian Splatting (GS) framework represents a scene as optimizable Gaussian primitives, offering fast, differentiable rendering and semantic decomposition. Building on GS, recent methods enable interactive scene editing—recoloring objects or inserting new ones—by manipulating these primitives.
+          </p>
+          <p>
+            We tackle the fundamental task of transferring a 3D object from one scene to another with realistic relighting. This involves (1) extracting and aligning the object in 3D, and (2) removing source lighting effects and applying target-scene illumination without estimating explicit material properties. To meet these challenges, we introduce TranSplat.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Method -->
+<section class="section">
+  <div class="container is-max-widescreen">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-11-desktop">
+        <h2 class="title is-3">Method</h2>
+
+        <figure class="image">
+          <img
+            src="./static/images/Method.png"
+            alt="TranSplat Method Overview"
+          >
+          <figcaption class="has-text-centered">
+            Figure 1: Overview of the TranSplat pipeline.
+          </figcaption>
+        </figure>
+
+        <div class="content has-text-justified">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── INTERPOLATION SECTION ─── -->
+<style>
+  /* full-width & taller */
+  .interpolation-section {
+    padding: 2rem 0;
+    min-height: 60vh;
+  }
+  /* override Bulma container to be fluid here */
+  .interpolation-section .container {
+    max-width: 95vw;
+  }
+
+  /* SPACE & SIZE for the top env-map buttons */
+  .interpolation-section .envmap-selectors .column {
+    margin: 0 1.5rem;
+    flex: none;
+  }
+  .interpolation-section .envmap-selectors .column img {
+    max-width: 260px;
+    cursor: pointer;
+  }
+
+  /* BIGGER source/target thumbs */
+  .interpolation-section #source-envmap,
+  .interpolation-section #target-envmap {
+    max-width: 260px;
+  }
+
+  /* a slightly taller slider */
+  .interpolation-section .slider {
+    height: 1.8rem;
+  }
+</style>
+
+<section class="section interpolation-section">
+  <div class="container is-fluid">
+
+    <h2 class="title is-3">Relighting Results</h2>
+    <div class="content has-text-justified">
+      <p>
+        Novel views of the relighting results on TensoIR dataset across different environment maps.
+      </p>
+    </div>
+
+    <!-- 1) BIG ENV-MAP SELECTORS -->
+    <div class="columns is-centered envmap-selectors">
+      <div class="column is-narrow has-text-centered">
+        <img
+          src="./static/images/envmaps/fireplace.jpg"
+          class="env-button interpolation-image"
+          data-base="./static/interpolation/fireplace"
+          data-frames="197"
+          alt="Fireplace Env Map"
+        />
+        <p>Fireplace</p>
+      </div>
+      <div class="column is-narrow has-text-centered">
+        <img
+          src="./static/images/envmaps/sunset.jpg"
+          class="env-button interpolation-image"
+          data-base="./static/interpolation/sunset"
+          data-frames="197"
+          alt="Sunset Env Map"
+        />
+        <p>Sunset</p>
+      </div>
+      <div class="column is-narrow has-text-centered">
+        <img
+          src="./static/images/envmaps/forest.jpg"
+          class="env-button interpolation-image"
+          data-base="./static/interpolation/stacked"
+          data-frames="197"
+          alt="Forest Env Map"
+        />
+        <p>Forest</p>
+      </div>
+    </div>
+
+    <!-- 2) WIDE SLIDER PANEL -->
+    <div class="columns is-vcentered interpolation-panel">
+      <!-- source fixed -->
+      <div class="column is-3 has-text-centered">
+        <img
+          id="source-envmap"
+          src="./static/images/envmaps/city.jpg"
+          class="interpolation-image"
+          alt="Source Env Map: City"
+        />
+        <p>Source Env Map: City</p>
+      </div>
+
+      <!-- big centered slider -->
+      <div class="column is-6 interpolation-video-column">
+        <div id="interpolation-image-wrapper">Loading…</div>
+        <input
+          id="interpolation-slider"
+          class="slider is-fullwidth is-large is-info"
+          type="range"
+          step="1"
+          min="0"
+          max="196"
+          value="0"
+        />
+      </div>
+
+      <!-- target swaps on click -->
+      <div class="column is-3 has-text-centered">
+        <img
+          id="target-envmap"
+          src="./static/images/envmaps/fireplace.jpg"
+          class="interpolation-image"
+          alt="Target Env Map"
+        />
+        <p id="target-envmap-label">Target Env Map</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+<!-- Experiments -->
+<section class="section">
+  <div class="container is-max-widescreen">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-11-desktop">
+        <h2 class="title is-3">Experiments</h2>
+
+        <figure class="image">
+          <img 
+            src="./static/images/Experiment.png" 
+            alt="TranSplat Experimental Results"
+          >
+          <figcaption class="has-text-centered">
+            Figure 2: Qualitative and quantitative results across synthetic and real-world scenes.
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@misc{boyang2025transplatlightingconsistentcrosssceneobject,
+      title={TranSplat: Lighting-Consistent Cross-Scene Object Transfer with 3D Gaussian Splatting}, 
+      author={Boyang and Yu and Yanlin Jin and Ashok Veeraraghavan and Akshat Dave and Guha Balakrishnan},
+      year={2025},
+      eprint={2503.22676},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2503.22676}, 
+}</code></pre>
+  </div>
+</section>
+
+
+</body>
+</html>
