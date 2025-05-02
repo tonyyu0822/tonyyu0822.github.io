@@ -4,6 +4,7 @@
 window.HELP_IMPROVE_VIDEOJS = false;
 
 // ─── Interpolation Globals ───
+// default to fireplace instead of stacked
 var INTERP_BASE       = "./static/interpolation/fireplace";
 var NUM_INTERP_FRAMES = 197;
 var interp_images     = [];
@@ -52,6 +53,10 @@ $(document).ready(function() {
   setInterpolationImage(0);
   $("#interpolation-slider").prop("max", NUM_INTERP_FRAMES - 1);
 
+  // initialize the target thumbnail & label to Fireplace
+  $("#target-envmap").attr("src", "./static/images/envmaps/fireplace.jpg");
+  $("#target-envmap-label").text("Fireplace");
+
   // slider → frame
   $("#interpolation-slider").on("input", function() {
     setInterpolationImage(this.value);
@@ -68,7 +73,7 @@ $(document).ready(function() {
       .val(0);
     setInterpolationImage(0);
 
-    // update the *target* envmap and its label, keep source static
+    // update only the target envmap and its label
     $("#target-envmap").attr("src", $(this).attr("src"));
     $("#target-envmap-label").text($(this).next("p").text());
   });
