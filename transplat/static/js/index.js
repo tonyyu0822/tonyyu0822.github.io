@@ -4,7 +4,7 @@
 window.HELP_IMPROVE_VIDEOJS = false;
 
 // ─── Interpolation Globals ───
-var INTERP_BASE       = "./static/interpolation/stacked";
+var INTERP_BASE       = "./static/interpolation/fireplace";
 var NUM_INTERP_FRAMES = 197;
 var interp_images     = [];
 
