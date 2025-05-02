@@ -92,9 +92,11 @@
             Cross-Scene Object Transfer with 3D Gaussian Splatting</h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              <a href="https://tonyyu0822.github.io">Boyang (Tony) Yu</a><sup>1</sup>,</span>
+              <a href="https://tonyyu0822.github.io">Boyang (Tony) Yu</a><sup><span style="font-size: 1.5em;">*</span>1</sup>,
+            </span>
             <span class="author-block">
-              <a href="https://utkarshsinha.com">Yanlin Jin</a><sup>1</sup>,</span>
+              <a href="https://www.neiljin.site">Yanlin Jin</a><sup><span style="font-size: 1.5em;">*</span>1</sup>,
+            </span>
             <span class="author-block">
               <a href="https://computationalimaging.rice.edu/team/ashok-veeraraghavan/">Ashok Veeraraghavan</a><sup>1</sup>,
             </span>
@@ -107,6 +109,7 @@
           </div>
 
           <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup><span style="font-size: 1.5em;">*</span></sup>Equal Contribution,</span>
             <span class="author-block"><sup>1</sup>Rice University,</span>
             <span class="author-block"><sup>2</sup>Massachusetts Institute of Technology</span>
           </div>
@@ -185,40 +188,152 @@
     <div class="container">
       <div id="results-carousel" class="carousel results-carousel">
         <div class="item item-steve">
-          <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/darkBench_slider.mp4"
-                    type="video/mp4">
-          </video>
+          <div class="image-comparison">
+            <div class="images-container">
+              <img class="before-image" src="static/images/comparison/chair_before.png" alt="" />
+              <img class="after-image" src="static/images/comparison/chair_after.png" alt="" />
+          
+              <div class="slider-line"></div>
+              <div class="slider-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"
+                  />
+                </svg>
+              </div>
+          
+              <input type="range" class="slider" min="0" max="100" />
+            </div>
+          </div>
         </div>
         <div class="item item-chair-tp">
-          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/chairScene_slider.mp4"
-                    type="video/mp4">
-          </video>
+          <div class="image-comparison">
+            <div class="images-container">
+              <img class="before-image" src="static/images/comparison/teaser_before.png" alt="" />
+              <img class="after-image" src="static/images/comparison/teaser_after.png" alt="" />
+              <div class="slider-line"></div>
+              <div class="slider-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"
+                  />
+                </svg>
+              </div>
+          
+              <input type="range" class="slider" min="0" max="100" />
+            </div>
+          </div>
         </div>
         <div class="item item-shiba">
-          <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/darkBench_ficus_lego_slider.mp4"
-                    type="video/mp4">
-          </video>
+          <div class="image-comparison">
+            <div class="images-container">
+              <img class="before-image" src="static/images/comparison/room_before.png" alt="" />
+              <img class="after-image" src="static/images/comparison/room_after.png" alt="" />
+          
+              <div class="slider-line"></div>
+              <div class="slider-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"
+                  />
+                </svg>
+              </div>
+          
+              <input type="range" class="slider" min="0" max="100" />
+            </div>
+          </div>
         </div>
         <div class="item item-fullbody">
-          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/chairScene_bunny_slider.mp4"
-                    type="video/mp4">
-          </video>
+          <div class="image-comparison">
+            <div class="images-container">
+              <img class="before-image" src="static/images/comparison/armadillo_before.png" alt="" />
+              <img class="after-image" src="static/images/comparison/armadillo_after.png" alt="" />
+          
+              <div class="slider-line"></div>
+              <div class="slider-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"
+                  />
+                </svg>
+              </div>
+          
+              <input type="range" class="slider" min="0" max="100" />
+            </div>
+          </div>
         </div>
         <div class="item item-blueshirt">
-          <video poster="" id="blueshirt" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/roomScene_slider.mp4"
-                    type="video/mp4">
-          </video>
+          <div class="image-comparison">
+            <div class="images-container">
+
+              <img class="before-image" src="static/images/comparison/bench_before.png" alt="" />
+              <img class="after-image" src="static/images/comparison/bench_after.png" alt="" />
+
+              <div class="slider-line"></div>
+              <div class="slider-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"
+                  />
+                </svg>
+              </div>
+          
+              <input type="range" class="slider" min="0" max="100" />
+            </div>
+          </div>
 
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<script src="static/js/slide.js"></script>
 
 <!-- Abstract -->
 <section class="section">
@@ -435,7 +550,7 @@
     <h2 class="title">BibTeX</h2>
     <pre><code>@misc{boyang2025transplatlightingconsistentcrosssceneobject,
       title={TranSplat: Lighting-Consistent Cross-Scene Object Transfer with 3D Gaussian Splatting}, 
-      author={Boyang and Yu and Yanlin Jin and Ashok Veeraraghavan and Akshat Dave and Guha Balakrishnan},
+      author={Boyang Yu and Yanlin Jin and Ashok Veeraraghavan and Akshat Dave and Guha Balakrishnan},
       year={2025},
       eprint={2503.22676},
       archivePrefix={arXiv},
