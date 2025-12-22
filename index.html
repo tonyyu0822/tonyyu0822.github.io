@@ -88,8 +88,8 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">TranSplat: Lighting-Consistent
-            Cross-Scene Object Transfer with 3D Gaussian Splatting</h1>
+          <h1 class="title is-1 publication-title">TranSplat: Instant Cross-Scene Object Relighting in Gaussian Splatting
+via Spherical Harmonic Transfer</h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
               <a href="https://tonyyu0822.github.io">Boyang (Tony) Yu</a><sup><span style="font-size: 1.5em;">*</span>1</sup>,
@@ -98,10 +98,10 @@
               <a href="https://www.neiljin.site">Yanlin Jin</a><sup><span style="font-size: 1.5em;">*</span>1</sup>,
             </span>
             <span class="author-block">
-              <a href="https://computationalimaging.rice.edu/team/ashok-veeraraghavan/">Ashok Veeraraghavan</a><sup>1</sup>,
+              <a href="https://yunhe20.github.io/">Yun He</a><sup>2</sup>,
             </span>
             <span class="author-block">
-              <a href="https://akshatdave.github.io/">Akshat Dave</a><sup>2</sup>,
+              <a href="https://akshatdave.github.io/">Akshat Dave</a><sup>3</sup>,
             </span>
             <span class="author-block">
               <a href="https://www.guhabalakrishnan.com/">Guha Balakrishnan</a><sup>1</sup>,
@@ -111,7 +111,8 @@
           <div class="is-size-5 publication-authors">
             <span class="author-block"><sup><span style="font-size: 1.5em;">*</span></sup>Equal Contribution,</span>
             <span class="author-block"><sup>1</sup>Rice University,</span>
-            <span class="author-block"><sup>2</sup>Massachusetts Institute of Technology</span>
+            <span class="author-block"><sup>2</sup>University of Maryland</span>
+            <span class="author-block"><sup>3</sup>Stony Brook University</span>
           </div>
 
           <div class="column has-text-centered">
@@ -358,13 +359,10 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            We present TranSplat, a 3D scene rendering algorithm that enables realistic cross-scene object transfer (from a source to a target scene) based on the Gaussian Splatting framework. Our approach addresses two critical challenges: (1) precise 3D object extraction from the source scene, and (2) faithful relighting of the transferred object in the target scene without explicit material property estimation.
+            We present TranSplat, a method for fast and accurate object relighting for the 3D Gaussian Splatting (GS) framework when transferring a 3D object from a source GS scene to a target GS scene. TranSplat is based on a theoretical radiance transfer identity for cross-scene relighting of objects with radially symmetric BRDFs that involves only taking simple products of spherical harmonic appearance coefficients of the object, source, and target environment maps without any explicit computation of scene quantities (e.g., the BRDFs themselves). TranSplat is the first method to demonstrate how this theoretical identity may be used to perform relighting within the GS framework, and furthermore, by automatically inferring unknown source and target environment maps directly from the source and target scene GS representations.
           </p>
           <p>
-            TranSplat fits a splatting model to the source scene, using 2D object masks to drive fine-grained 3D segmentation. Following user-guided insertion of the object into the target scene, along with automatic refinement of position and orientation, TranSplat derives per-Gaussian radiance transfer functions via spherical harmonic analysis to adapt the object's appearance to match the target scene's lighting environment. This relighting strategy does not require explicitly estimating physical scene properties such as BRDFs.
-          </p>
-          <p>
-            Evaluated on several synthetic and real-world scenes and objects, TranSplat yields excellent 3D object extractions and relighting performance compared to recent baseline methods and visually convincing cross-scene object transfers. Crucially, TranSplat does not compute any material properties, such as BRDFs, to perform relighting.
+            We evaluated TranSplat on several synthetic and real-world scenes and objects, demonstrating comparable 3D object relighting performance to recent conventional inverse rendering-based GS methods with a fraction of their runtime. While TranSplat is theoretically best-suited for radially symmetric BRDFs, results demonstrate that TranSplat still offers perceptually realistic renderings on real scenes and opens a valuable, lightweight path forward to relighting with the GS framework.
           </p>
         </div>
       </div>
@@ -400,7 +398,7 @@
 
         <figure class="image">
           <img
-            src="./static/images/Method.png"
+            src="./static/images/Method.pdf"
             alt="TranSplat Method Overview"
           >
           <figcaption class="has-text-centered">
@@ -452,7 +450,7 @@
 <section class="section interpolation-section">
   <div class="container is-fluid">
 
-    <h2 class="title is-3">Relighting Results</h2>
+    <h2 class="title is-3">Relighting Results <span class="is-size-7">(More 3D results are on the way)</span></h2>
     <div class="content has-text-justified">
       <p>
         Novel views of the relighting results on TensoIR dataset across different environment maps.
@@ -551,7 +549,7 @@
             alt="TranSplat Experimental Results"
           >
           <figcaption class="has-text-centered">
-            Figure 2: Qualitative and quantitative results across synthetic and real-world scenes.
+            Figure 2: Qualitative comparison of TranSplat with recent Gaussian relighting methods.
           </figcaption>
         </figure>
       </div>
@@ -563,9 +561,9 @@
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-    <pre><code>@misc{boyang2025transplatlightingconsistentcrosssceneobject,
-      title={TranSplat: Lighting-Consistent Cross-Scene Object Transfer with 3D Gaussian Splatting}, 
-      author={Boyang Yu and Yanlin Jin and Ashok Veeraraghavan and Akshat Dave and Guha Balakrishnan},
+    <pre><code>@misc{yu2025transplatinstantcrosssceneobject,
+      title={TranSplat: Instant Cross-Scene Object Relighting in Gaussian Splatting via Spherical Harmonic Transfer}, 
+      author={Boyang Yu and Yanlin Jin and Yun He and Akshat Dave and Guha Balakrishnan},
       year={2025},
       eprint={2503.22676},
       archivePrefix={arXiv},
