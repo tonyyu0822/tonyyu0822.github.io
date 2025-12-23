@@ -182,7 +182,7 @@ h1 {
   margin: 20px auto;
   border-radius: 20px;
   overflow: hidden;
-  aspect-ratio: 7 / 5; /* force ratio and heght */
+  aspect-ratio: 7.5 / 5; /* force ratio and heght */
 }
 
 .image-comparison img {
@@ -242,3 +242,18 @@ h1 {
   width: 24px;
   height: 24px;
 }
+
+.notice {
+  max-width: 620px;
+  margin: 20px auto;
+  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  font-size: 15px;
+  text-align: left;
+  border-left: 4px solid #f39c12;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
