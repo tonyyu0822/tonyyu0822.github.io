@@ -177,6 +177,12 @@ h1 {
   color: #e43434;
 }
 
+.comparison-results {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
 .image-comparison {
   max-width: 700px;
   margin: 20px auto;
@@ -185,7 +191,8 @@ h1 {
   aspect-ratio: 7.5 / 5; /* force ratio and heght */
 }
 
-.image-comparison img {
+.image-comparison img,
+.image-comparison video {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -195,19 +202,84 @@ h1 {
 .image-comparison .images-container {
   position: relative;
   display: flex;
+  height: 100%;
+  cursor: ew-resize;
 }
 
 .image-comparison .images-container .before-image {
   position: absolute;
   top: 0;
-  width: 50%;
+  left: 0;
+  width: 100%;
+  clip-path: inset(0 34% 0 33%);
+  z-index: 1;
+}
+
+.image-comparison .images-container .after-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  clip-path: inset(0 0 0 66%);
+  z-index: 2;
 }
 
 .image-comparison .slider {
   position: absolute;
   inset: 0;
   opacity: 0;
-  cursor: ew-resize;
+  pointer-events: none;
+  z-index: 8;
+}
+
+.image-comparison .comparison-labels {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 28px;
+  bottom: 10px;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.image-comparison .comparison-labels span {
+  position: absolute;
+  bottom: 0;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 13px;
+  line-height: 1.2;
+  text-align: center;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.image-comparison .no-label {
+  clip-path: inset(0 67% 0 0);
+}
+
+.image-comparison .before-label {
+  clip-path: inset(0 34% 0 33%);
+  z-index: 4;
+}
+
+.image-comparison .after-label {
+  clip-path: inset(0 0 0 66%);
+  z-index: 5;
+}
+
+.image-comparison .no-label span {
+  left: 16.5%;
+}
+
+.image-comparison .before-label span {
+  left: 49.5%;
+}
+
+.image-comparison .after-label span {
+  left: 83%;
 }
 
 .image-comparison .slider-line {
@@ -218,6 +290,16 @@ h1 {
   left: 50%;
   transform: translateX(-50%);
   pointer-events: none;
+  z-index: 6;
+}
+
+.image-comparison .slider-line-left {
+  left: 33%;
+}
+
+.image-comparison .slider-line-right {
+  left: 66%;
+  z-index: 6;
 }
 
 .image-comparison .slider-icon {
@@ -236,6 +318,16 @@ h1 {
   justify-content: center;
   transform: translate(-50%, -50%) rotateZ(90deg);
   pointer-events: none;
+  z-index: 7;
+}
+
+.image-comparison .slider-icon-left {
+  left: 33%;
+}
+
+.image-comparison .slider-icon-right {
+  left: 66%;
+  z-index: 7;
 }
 
 .image-comparison .slider-icon svg {
@@ -256,4 +348,3 @@ h1 {
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-

@@ -166,109 +166,80 @@ via Spherical Harmonic Transfer</h1>
 <section class="hero is-light is-small">
   <div class="hero-body">
     <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
+      <div class="comparison-results">
         <div class="item item-steve">
           <div class="image-comparison">
             <div class="images-container">
-              <img class="before-image" src="static/images/comparison/chair_before.png" alt="Chair Before" />
-              <img class="after-image" src="static/images/comparison/chair_after.png" alt="Chair After" />
-              <div class="slider-line"></div>
-              <div class="slider-icon">
+              <video class="no-image" autoplay muted loop playsinline>
+                <source src="static/videos/bonsai_no.mp4" type="video/mp4">
+              </video>
+              <video class="before-image" autoplay muted loop playsinline>
+                <source src="static/videos/bonsai_before.mp4" type="video/mp4">
+              </video>
+              <video class="after-image" autoplay muted loop playsinline>
+                <source src="static/videos/bonsai_relight.mp4" type="video/mp4">
+              </video>
+              <div class="comparison-labels no-label">
+                <span>Original</span>
+              </div>
+              <div class="comparison-labels before-label">
+                <span>Before Relighting</span>
+              </div>
+              <div class="comparison-labels after-label">
+                <span>Relighting</span>
+              </div>
+              <div class="slider-line slider-line-left"></div>
+              <div class="slider-line slider-line-right"></div>
+              <div class="slider-icon slider-icon-left">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
                 </svg>
               </div>
-              <input type="range" class="slider" min="0" max="100" />
+              <div class="slider-icon slider-icon-right">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                </svg>
+              </div>
+              <input type="range" class="slider slider-left" min="0" max="100" value="33" />
+              <input type="range" class="slider slider-right" min="0" max="100" value="66" />
             </div>
           </div>
         </div>
         <div class="item item-chair-tp">
           <div class="image-comparison">
             <div class="images-container">
-              <img class="before-image" src="static/images/comparison/teaser_before.png" alt="Teaser Before" />
-              <img class="after-image" src="static/images/comparison/teaser_after.png" alt="Teaser After" />
-              <div class="slider-line"></div>
-              <div class="slider-icon">
+              <video class="no-image" autoplay muted loop playsinline>
+                <source src="static/videos/vase_no.mp4" type="video/mp4">
+              </video>
+              <video class="before-image" autoplay muted loop playsinline>
+                <source src="static/videos/vase_before.mp4" type="video/mp4">
+              </video>
+              <video class="after-image" autoplay muted loop playsinline>
+                <source src="static/videos/vase_relight.mp4" type="video/mp4">
+              </video>
+              <div class="comparison-labels no-label">
+                <span>Original</span>
+              </div>
+              <div class="comparison-labels before-label">
+                <span>Before Relighting</span>
+              </div>
+              <div class="comparison-labels after-label">
+                <span>Relighting</span>
+              </div>
+              <div class="slider-line slider-line-left"></div>
+              <div class="slider-line slider-line-right"></div>
+              <div class="slider-icon slider-icon-left">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
                 </svg>
               </div>
-              <input type="range" class="slider" min="0" max="100" />
-            </div>
-          </div>
-        </div>
-        <div class="item item-shiba">
-          <div class="image-comparison">
-            <div class="images-container">
-              <img class="before-image" src="static/images/comparison/garage1-before.jpg" alt="Garage1 Before" />
-              <img class="after-image" src="static/images/comparison/garage1-after.png" alt="Garage1 After" />
-              <div class="slider-line"></div>
-              <div class="slider-icon">
+              <div class="slider-icon slider-icon-right">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
                 </svg>
               </div>
-              <input type="range" class="slider" min="0" max="100" />
-            </div>
-          </div>
-        </div>
-        <div class="item item-fullbody">
-          <div class="image-comparison">
-            <div class="images-container">
-              <img class="before-image" src="static/images/comparison/armadillo_before.png" alt="Armadillo Before" />
-              <img class="after-image" src="static/images/comparison/armadillo_after.png" alt="Armadillo After" />
-              <div class="slider-line"></div>
-              <div class="slider-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
-                </svg>
-              </div>
-              <input type="range" class="slider" min="0" max="100" />
-            </div>
-          </div>
-        </div>
-        <div class="item item-blueshirt">
-          <div class="image-comparison">
-            <div class="images-container">
-              <img class="before-image" src="static/images/comparison/bench_before.png" alt="Bench Before" />
-              <img class="after-image" src="static/images/comparison/bench_after.png" alt="Bench After" />
-              <div class="slider-line"></div>
-              <div class="slider-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
-                </svg>
-              </div>
-              <input type="range" class="slider" min="0" max="100" />
-            </div>
-          </div>
-        </div>
-        <div class="item item-fullbody">
-          <div class="image-comparison">
-            <div class="images-container">
-              <img class="before-image" src="static/images/comparison/bedroom-1-before.jpg" alt="Bed Before" />
-              <img class="after-image" src="static/images/comparison/bedroom-1-after.jpg" alt="Bed After" />
-              <div class="slider-line"></div>
-              <div class="slider-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
-                </svg>
-              </div>
-              <input type="range" class="slider" min="0" max="100" />
-            </div>
-          </div>
-        </div>
-        <div class="item item-fullbody">
-          <div class="image-comparison">
-            <div class="images-container">
-              <img class="before-image" src="static/images/comparison/garage2-109-before.png" alt="Garage2 Before" />
-              <img class="after-image" src="static/images/comparison/garage2-109-after.png" alt="Garage2 After" />
-              <div class="slider-line"></div>
-              <div class="slider-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
-                </svg>
-              </div>
-              <input type="range" class="slider" min="0" max="100" />
+              <input type="range" class="slider slider-left" min="0" max="100" value="33" />
+              <input type="range" class="slider slider-right" min="0" max="100" value="66" />
             </div>
           </div>
         </div>
@@ -287,10 +258,7 @@ via Spherical Harmonic Transfer</h1>
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            We present TranSplat, a method for fast and accurate object relighting for the 3D Gaussian Splatting (GS) framework when transferring a 3D object from a source GS scene to a target GS scene. TranSplat is based on a theoretical radiance transfer identity for cross-scene relighting of objects with radially symmetric BRDFs that involves only taking simple products of spherical harmonic appearance coefficients of the object, source, and target environment maps without any explicit computation of scene quantities (e.g., the BRDFs themselves). TranSplat is the first method to demonstrate how this theoretical identity may be used to perform relighting within the GS framework, and furthermore, by automatically inferring unknown source and target environment maps directly from the source and target scene GS representations.
-          </p>
-          <p>
-            We evaluated TranSplat on several synthetic and real-world scenes and objects, demonstrating comparable 3D object relighting performance to recent conventional inverse rendering-based GS methods with a fraction of their runtime. While TranSplat is theoretically best-suited for radially symmetric BRDFs, results demonstrate that TranSplat still offers perceptually realistic renderings on real scenes and opens a valuable, lightweight path forward to relighting with the GS framework.
+            We present TranSplat, a method for instant, accurate object relighting within the Gaussian Splatting (GS) framework. Rather than relying on costly inverse rendering routines, we propose a BRDF-free radiance transfer strategy that analytically modulates the spherical harmonic (SH) appearance coefficients of an object's 2D Gaussian surfels using per-normal irradiance ratios derived from source and target environment maps. To handle view-dependent and glossy appearances without explicit material estimation, we introduce a specularity-aware dual-path SH transfer strategy that adapts higher-order SH bands in the reflection domain. Additionally, we propose a lightweight SH-domain self-shadowing module to ensure physically realistic occlusion without explicit mesh raycasting. Operating as a post-processing step, TranSplat requires no additional GS retraining for a pair of source and target scenes. Evaluations on synthetic and real-world objects demonstrate state-of-the-art accuracy, outperforming recent inverse-rendering and diffusion-based GS relighting methods across most conditions, all while completing relighting operations in under one second. Although bounded by radially symmetric BRDF approximations and the low-pass nature of the SH basis, TranSplat produces perceptually realistic renderings even for glossy, complex materials, establishing a valuable, lightweight path forward for GS relighting.
           </p>
         </div>
       </div>
