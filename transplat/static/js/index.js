@@ -45,31 +45,6 @@ function requestInterpolationFrame(idx) {
   window.requestAnimationFrame(commitInterpolationSeek);
 }
 
-function setupViewportVideoPlayback() {
-  var videos = Array.from(document.querySelectorAll("video[autoplay]:not(#interpolation-video)"));
-  if (!("IntersectionObserver" in window)) return;
-
-  videos.forEach(function(video) {
-    video.preload = "metadata";
-    video.pause();
-  });
-
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      var video = entry.target;
-      if (entry.isIntersecting) {
-        video.play().catch(function() {});
-      } else {
-        video.pause();
-      }
-    });
-  }, { threshold: 0.2 });
-
-  videos.forEach(function(video) {
-    observer.observe(video);
-  });
-}
-
 $(document).ready(function() {
   // ─── Navbar burger toggle ───
   $(".navbar-burger").click(function() {
@@ -132,8 +107,6 @@ $(document).ready(function() {
     $("#target-envmap").attr("src", $(this).attr("src"));
     $("#target-envmap-label").text($(this).next("p").text());
   });
-
-  setupViewportVideoPlayback();
 
   // ─── Bulma-Slider attach (for any .slider) ───
   if (window.bulmaSlider) bulmaSlider.attach();

@@ -12,19 +12,15 @@ document.querySelectorAll(".image-comparison").forEach((comparison) => {
   const leftIcon = comparison.querySelector(".slider-icon-left");
   const rightIcon = comparison.querySelector(".slider-icon-right");
   const videos = comparison.querySelectorAll("video");
+  let sliderUpdateScheduled = false;
 
   videos.forEach((video) => {
     video.addEventListener("play", () => {
       videos.forEach((other) => {
-        if (other !== video && other.paused) other.play();
-      });
-    });
-
-    video.addEventListener("timeupdate", () => {
-      videos.forEach((other) => {
-        if (other !== video && Math.abs(other.currentTime - video.currentTime) > 0.1) {
+        if (other !== video && other.readyState > 0 && Math.abs(other.currentTime - video.currentTime) > 0.25) {
           other.currentTime = video.currentTime;
         }
+        if (other !== video && other.paused) other.play();
       });
     });
   });
@@ -51,8 +47,17 @@ document.querySelectorAll(".image-comparison").forEach((comparison) => {
     rightIcon.style.left = right + "%";
   };
 
-  leftSlider.addEventListener("input", updateSliders);
-  rightSlider.addEventListener("input", updateSliders);
+  const scheduleSliderUpdate = () => {
+    if (sliderUpdateScheduled) return;
+    sliderUpdateScheduled = true;
+    requestAnimationFrame(() => {
+      sliderUpdateScheduled = false;
+      updateSliders();
+    });
+  };
+
+  leftSlider.addEventListener("input", scheduleSliderUpdate);
+  rightSlider.addEventListener("input", scheduleSliderUpdate);
   container.addEventListener("pointerdown", (event) => {
     const rect = container.getBoundingClientRect();
     const startValue = Math.max(0, Math.min(100, ((event.clientX - rect.left) / rect.width) * 100));
@@ -63,7 +68,7 @@ document.querySelectorAll(".image-comparison").forEach((comparison) => {
       const right = Number(rightSlider.value);
 
       activeSlider.value = activeSlider === leftSlider ? Math.min(value, right) : Math.max(value, left);
-      updateSliders();
+      scheduleSliderUpdate();
     };
     const stopDrag = () => {
       window.removeEventListener("pointermove", moveHandle);
