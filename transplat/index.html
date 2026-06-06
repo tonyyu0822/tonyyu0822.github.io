@@ -123,9 +123,9 @@ via Spherical Harmonic Transfer</h1>
                   </a>
               </span>
 
-              <section class="notice">
+              <!-- <section class="notice">
                   <p>⚠️ This site is under active development. Displayed results may not be up-to-date (e.g., shadows may be missing). More advanced 3D demonstrations are coming soon.</p>
-              </section>
+              </section> -->
               
           </div>
         </div>
@@ -134,41 +134,6 @@ via Spherical Harmonic Transfer</h1>
   </div>
 </section>
 
-<!-- <section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <div class="video-container" style="display: flex; justify-content: center; align-items: center; gap: 20px;">
-        <video id="teaser1" autoplay muted loop playsinline height="100%">
-          <source src="./static/videos/originalvs gsir.mp4" type="video/mp4">
-        </video>
-        <video id="teaser2" autoplay muted loop playsinline height="100%">
-          <source src="./static/videos/Transplat Roating comparison.mp4" type="video/mp4">
-        </video>
-      </div>
-      <h2 class="subtitle has-text-centered">
-        <span class="dnerf">Transplat relighting on synthetic TensoIR dataset</span>
-      </h2>
-    </div>
-  </div>
-</section> -->
-
-<section class="hero teaser">
-  <div class="hero-body">
-    <div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
-      <video autoplay muted loop playsinline style="width: 48%; height: auto;">
-        <source src="./static/videos/originalvs gsir.mp4" type="video/mp4">
-      </video>
-      <video autoplay muted loop playsinline style="width: 48%; height: auto;">
-        <source src="./static/videos/Transplat Roating comparison.mp4" type="video/mp4">
-      </video>
-    </div>
-    <h2 class="subtitle has-text-centered">
-      <span class="dnerf">Transplat relighting on synthetic TensoIR dataset</span>
-    </h2>
-  </div>
-</section>
-
-
 <section class="hero is-light is-small">
   <div class="hero-body">
     <div class="container">
@@ -176,13 +141,13 @@ via Spherical Harmonic Transfer</h1>
         <div class="item item-steve">
           <div class="image-comparison">
             <div class="images-container">
-              <video class="no-image" autoplay muted loop playsinline>
+              <video class="no-image" autoplay muted loop playsinline preload="metadata">
                 <source src="static/videos/bonsai_no.mp4" type="video/mp4">
               </video>
-              <video class="before-image" autoplay muted loop playsinline>
+              <video class="before-image" autoplay muted loop playsinline preload="metadata">
                 <source src="static/videos/bonsai_before.mp4" type="video/mp4">
               </video>
-              <video class="after-image" autoplay muted loop playsinline>
+              <video class="after-image" autoplay muted loop playsinline preload="metadata">
                 <source src="static/videos/bonsai_relight.mp4" type="video/mp4">
               </video>
               <div class="comparison-labels no-label">
@@ -214,13 +179,13 @@ via Spherical Harmonic Transfer</h1>
         <div class="item item-chair-tp">
           <div class="image-comparison">
             <div class="images-container">
-              <video class="no-image" autoplay muted loop playsinline>
+              <video class="no-image" autoplay muted loop playsinline preload="metadata">
                 <source src="static/videos/vase_no.mp4" type="video/mp4">
               </video>
-              <video class="before-image" autoplay muted loop playsinline>
+              <video class="before-image" autoplay muted loop playsinline preload="metadata">
                 <source src="static/videos/vase_before.mp4" type="video/mp4">
               </video>
-              <video class="after-image" autoplay muted loop playsinline>
+              <video class="after-image" autoplay muted loop playsinline preload="metadata">
                 <source src="static/videos/vase_relight.mp4" type="video/mp4">
               </video>
               <div class="comparison-labels no-label">
@@ -373,9 +338,13 @@ via Spherical Harmonic Transfer</h1>
         <img
           src="./static/images/envmaps/fireplace.jpg"
           class="env-button interpolation-image envmap-img"
-          data-base="./static/interpolation/fireplace"
-          data-frames="197"
+          data-video="./static/videos/interpolation/fireplace.mp4"
+          data-frames="198"
           alt="Fireplace Env Map"
+          width="1024"
+          height="512"
+          loading="lazy"
+          decoding="async"
           style="width: 100%; height: auto; border-radius: 10px;" />
         <p>Fireplace</p>
       </div>
@@ -383,9 +352,13 @@ via Spherical Harmonic Transfer</h1>
         <img
           src="./static/images/envmaps/sunset.jpg"
           class="env-button interpolation-image envmap-img"
-          data-base="./static/interpolation/sunset"
+          data-video="./static/videos/interpolation/sunset.mp4"
           data-frames="197"
           alt="Sunset Env Map"
+          width="1024"
+          height="512"
+          loading="lazy"
+          decoding="async"
           style="width: 100%; height: auto; border-radius: 10px;" />
         <p>Sunset</p>
       </div>
@@ -393,9 +366,13 @@ via Spherical Harmonic Transfer</h1>
         <img
           src="./static/images/envmaps/forest.jpg"
           class="env-button interpolation-image envmap-img"
-          data-base="./static/interpolation/stacked"
-          data-frames="197"
+          data-video="./static/videos/interpolation/forest.mp4"
+          data-frames="198"
           alt="Forest Env Map"
+          width="1024"
+          height="512"
+          loading="lazy"
+          decoding="async"
           style="width: 100%; height: auto; border-radius: 10px;" />
         <p>Forest</p>
       </div>
@@ -410,20 +387,34 @@ via Spherical Harmonic Transfer</h1>
           src="./static/images/envmaps/city.jpg"
           class="interpolation-image"
           alt="Source Env Map: City"
+          width="1024"
+          height="512"
+          loading="lazy"
+          decoding="async"
         />
         <p>Source Env Map: City</p>
       </div>
 
       <!-- big centered slider -->
       <div class="column is-6 interpolation-video-column">
-        <div id="interpolation-image-wrapper">Loading…</div>
+        <div id="interpolation-image-wrapper">
+          <video
+            id="interpolation-video"
+            src="./static/videos/interpolation/fireplace.mp4"
+            muted
+            playsinline
+            preload="auto"
+            width="2560"
+            height="720"
+          ></video>
+        </div>
         <input
           id="interpolation-slider"
           class="slider is-fullwidth is-large is-info"
           type="range"
           step="1"
           min="0"
-          max="196"
+          max="197"
           value="0"
         />
       </div>
@@ -435,6 +426,10 @@ via Spherical Harmonic Transfer</h1>
           src="./static/images/envmaps/fireplace.jpg"
           class="interpolation-image"
           alt="Target Env Map"
+          width="1024"
+          height="512"
+          loading="lazy"
+          decoding="async"
         />
         <p id="target-envmap-label">Target Env Map</p>
       </div>
