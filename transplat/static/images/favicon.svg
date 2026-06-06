@@ -4,14 +4,11 @@
       <stop offset="0" stop-color="#111827"/>
       <stop offset="1" stop-color="#334155"/>
     </linearGradient>
-    <linearGradient id="light" x1="150" y1="120" x2="370" y2="398" gradientUnits="userSpaceOnUse">
+    <linearGradient id="letter" x1="152" y1="112" x2="360" y2="424" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#f8fafc"/>
-      <stop offset="0.5" stop-color="#a7f3d0"/>
       <stop offset="1" stop-color="#38bdf8"/>
     </linearGradient>
   </defs>
   <rect width="512" height="512" rx="96" fill="url(#bg)"/>
-  <path d="M142 150h224v56h-84v206h-56V206h-84z" fill="url(#light)"/>
-  <path d="M352 298c0 62-50 112-112 112-30 0-58-12-78-31l39-39c10 9 24 15 39 15 31 0 56-25 56-56 0-15-6-29-15-39l39-39c20 20 32 48 32 79z" fill="#e2e8f0" opacity="0.95"/>
-  <path d="M120 286c0-62 50-112 112-112 30 0 58 12 78 31l-39 39c-10-9-24-15-39-15-31 0-56 25-56 56 0 15 6 29 15 39l-39 39c-20-20-32-48-32-79z" fill="#38bdf8" opacity="0.9"/>
+  <path d="M118 126h276v70H291v286h-86V196H118z" fill="url(#letter)"/>
 </svg>
