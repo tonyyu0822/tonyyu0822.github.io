@@ -11,19 +11,51 @@ document.querySelectorAll(".image-comparison").forEach((comparison) => {
   const rightLine = comparison.querySelector(".slider-line-right");
   const leftIcon = comparison.querySelector(".slider-icon-left");
   const rightIcon = comparison.querySelector(".slider-icon-right");
-  const videos = comparison.querySelectorAll("video");
+  const videos = Array.from(comparison.querySelectorAll("video"));
+  const masterVideo = videos[0];
   let sliderUpdateScheduled = false;
 
-  videos.forEach((video) => {
-    video.addEventListener("play", () => {
-      videos.forEach((other) => {
-        if (other !== video && other.readyState > 0 && Math.abs(other.currentTime - video.currentTime) > 0.25) {
-          other.currentTime = video.currentTime;
-        }
-        if (other !== video && other.paused) other.play();
-      });
+  const syncVideoGroup = (threshold = 0.3) => {
+    if (!masterVideo || masterVideo.readyState < HTMLMediaElement.HAVE_CURRENT_DATA) return;
+    const masterTime = masterVideo.currentTime;
+
+    videos.forEach((video) => {
+      if (video === masterVideo || video.readyState < HTMLMediaElement.HAVE_CURRENT_DATA) return;
+      if (Math.abs(video.currentTime - masterTime) > threshold) {
+        video.currentTime = masterTime;
+      }
     });
+  };
+
+  const playVideoGroup = () => {
+    videos.forEach((video) => {
+      if (video.paused) video.play().catch(() => {});
+    });
+  };
+
+  videos.forEach((video) => {
+    video.autoplay = true;
+    video.defaultMuted = true;
+    video.muted = true;
+    video.playsInline = true;
+    video.preload = "auto";
+    video.setAttribute("autoplay", "");
+    video.setAttribute("muted", "");
+    video.setAttribute("playsinline", "");
+
+    video.addEventListener("play", () => {
+      syncVideoGroup(0.1);
+      playVideoGroup();
+    });
+    video.addEventListener("canplay", playVideoGroup);
+    video.addEventListener("loadeddata", playVideoGroup);
   });
+
+  playVideoGroup();
+  window.setInterval(() => {
+    playVideoGroup();
+    syncVideoGroup(0.25);
+  }, 1000);
 
   const updateSliders = () => {
     let left = Number(leftSlider.value);
