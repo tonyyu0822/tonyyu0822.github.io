@@ -11,6 +11,18 @@ var pendingFrame      = 0;
 var displayedFrame    = -1;
 var seekScheduled     = false;
 
+function prepareInlineVideo(video) {
+  if (!video) return;
+
+  video.muted = true;
+  video.defaultMuted = true;
+  video.playsInline = true;
+  video.preload = "auto";
+  video.setAttribute("muted", "");
+  video.setAttribute("playsinline", "");
+  video.setAttribute("webkit-playsinline", "");
+}
+
 function clampInterpolationFrame(idx) {
   idx = parseInt(idx, 10);
   if (Number.isNaN(idx)) idx = 0;
@@ -45,6 +57,25 @@ function requestInterpolationFrame(idx) {
   window.requestAnimationFrame(commitInterpolationSeek);
 }
 
+function warmInterpolationVideo(video) {
+  if (!video) return;
+
+  prepareInlineVideo(video);
+  if (video.readyState === HTMLMediaElement.HAVE_NOTHING) {
+    video.load();
+  }
+
+  var playPromise = video.play();
+  if (playPromise && typeof playPromise.then === "function") {
+    playPromise
+      .then(function() {
+        video.pause();
+        requestInterpolationFrame(pendingFrame);
+      })
+      .catch(function() {});
+  }
+}
+
 $(document).ready(function() {
   // ─── Navbar burger toggle ───
   $(".navbar-burger").click(function() {
@@ -69,6 +100,7 @@ $(document).ready(function() {
   // ─── Interpolation Slider Init ───
   $("#interpolation-slider").prop("max", NUM_INTERP_FRAMES - 1);
   if (interpolationVideo) {
+    prepareInlineVideo(interpolationVideo);
     interpolationVideo.pause();
     interpolationVideo.addEventListener("loadedmetadata", function() {
       requestInterpolationFrame(pendingFrame);
@@ -77,6 +109,16 @@ $(document).ready(function() {
       if (clampInterpolationFrame(pendingFrame) !== displayedFrame) {
         requestInterpolationFrame(pendingFrame);
       }
+    });
+    warmInterpolationVideo(interpolationVideo);
+  }
+
+  var interpolationSection = document.querySelector(".interpolation-section");
+  if (interpolationSection && interpolationVideo) {
+    ["touchstart", "pointerdown"].forEach(function(eventName) {
+      interpolationSection.addEventListener(eventName, function() {
+        warmInterpolationVideo(interpolationVideo);
+      }, { once: true, passive: true });
     });
   }
 
@@ -98,9 +140,13 @@ $(document).ready(function() {
       .val(0);
 
     if (interpolationVideo) {
+      var nextPoster = $(this).data("poster");
+
       interpolationVideo.pause();
+      if (nextPoster) interpolationVideo.poster = nextPoster;
       interpolationVideo.src = INTERP_VIDEO;
       interpolationVideo.load();
+      warmInterpolationVideo(interpolationVideo);
     }
 
     // update the *target* envmap and its label, keep source static

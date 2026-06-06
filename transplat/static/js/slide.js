@@ -14,6 +14,8 @@ document.querySelectorAll(".image-comparison").forEach((comparison) => {
   const videos = Array.from(comparison.querySelectorAll("video"));
   const masterVideo = videos[0];
   let sliderUpdateScheduled = false;
+  let buffering = false;
+  const loadedVideos = new Set();
 
   const syncVideoGroup = (threshold = 0.3) => {
     if (!masterVideo || masterVideo.readyState < HTMLMediaElement.HAVE_CURRENT_DATA) return;
@@ -27,10 +29,32 @@ document.querySelectorAll(".image-comparison").forEach((comparison) => {
     });
   };
 
+  const markVideoLoaded = (video) => {
+    if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+      loadedVideos.add(video);
+    }
+  };
+  const hasGroupLoaded = () => videos.length > 0 && loadedVideos.size === videos.length;
+  const canGroupResume = () => videos.every((video) => video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA);
+
+  const pauseVideoGroup = () => {
+    videos.forEach((video) => video.pause());
+  };
+
   const playVideoGroup = () => {
+    if (!hasGroupLoaded() || !canGroupResume()) return;
+
+    buffering = false;
+    syncVideoGroup(0.05);
     videos.forEach((video) => {
       if (video.paused) video.play().catch(() => {});
     });
+  };
+
+  const recoverVideoGroup = () => {
+    videos.forEach(markVideoLoaded);
+    if (!hasGroupLoaded() || !canGroupResume()) return;
+    window.setTimeout(playVideoGroup, 120);
   };
 
   videos.forEach((video) => {
@@ -42,17 +66,40 @@ document.querySelectorAll(".image-comparison").forEach((comparison) => {
     video.setAttribute("autoplay", "");
     video.setAttribute("muted", "");
     video.setAttribute("playsinline", "");
+    video.setAttribute("webkit-playsinline", "");
 
-    video.addEventListener("play", () => {
+    markVideoLoaded(video);
+    video.pause();
+
+    video.addEventListener("play", (event) => {
+      if (!hasGroupLoaded() || !canGroupResume()) {
+        event.target.pause();
+        return;
+      }
       syncVideoGroup(0.1);
-      playVideoGroup();
     });
-    video.addEventListener("canplay", playVideoGroup);
-    video.addEventListener("loadeddata", playVideoGroup);
+    video.addEventListener("canplay", recoverVideoGroup);
+    video.addEventListener("canplaythrough", playVideoGroup);
+    video.addEventListener("loadeddata", recoverVideoGroup);
+    video.addEventListener("waiting", () => {
+      buffering = true;
+      pauseVideoGroup();
+      recoverVideoGroup();
+    });
+    video.addEventListener("stalled", () => {
+      buffering = true;
+      pauseVideoGroup();
+      recoverVideoGroup();
+    });
   });
 
-  playVideoGroup();
+  recoverVideoGroup();
   window.setInterval(() => {
+    if (!hasGroupLoaded() || buffering) {
+      recoverVideoGroup();
+      return;
+    }
+
     playVideoGroup();
     syncVideoGroup(0.25);
   }, 1000);
