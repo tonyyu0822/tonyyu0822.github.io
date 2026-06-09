@@ -1,578 +1,163 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="description"
-        content=" 3D scene rendering algorithm that enables realistic cross-scene object transfer (from a source to a target scene) based on the Gaussian Splatting framework. Our approach addresses two critical challenges: (1) precise 3D object extraction from the source scene, and (2) faithful relighting of the transferred object in the target scene without explicit material property estimation.">
-  <meta name="keywords" content="TranSplat, Relight, 3D Rendering">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>TranSplat: Lighting-Consistent Cross-Scene Object Transfer with 3D Gaussian Splatting</title>
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
+    <title>Boyang (Tony) Yu</title>
 
-    function gtag() {
-      dataLayer.push(arguments);
-    }
+    <meta name="author" content="Boyang Yu">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="images/favicon/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+  </head>
 
-    gtag('js', new Date());
+  <body>
+    <table style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+      <tr style="padding:0px">
+        <td style="padding:0px">
 
-    gtag('config', 'G-PYVRSFMDRL');
-  </script>
+          <!-- Header: bio + photo -->
+          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+            <tr style="padding:0px">
+              <td style="padding:2.5%;width:63%;vertical-align:middle">
+                <p class="name" style="text-align: center;">
+                  Boyang (Tony) Yu
+                </p>
+                <p>
+                  I'm a 3rd-year Ph.D. student in Electrical and Computer Engineering at <a href="https://www.rice.edu/">Rice University</a>, advised by <a href="https://www.guhabalakrishnan.com/">Prof. Guha Balakrishnan</a>. I'm part of the <a href="https://computervision.rice.edu/">Rice Visual Intelligence Group</a> and the <a href="https://digitalhealth.rice.edu/">Digital Health Institute</a>.
+                </p>
+                <p>
+                  My research is centered on the intersection of deep learning, computer vision, and computer graphics. I focus on creating highly efficient algorithms that reduce computational overhead in neural rendering and radiance transfer, enabling real-time photorealistic relighting for dynamic 3D intelligence applications. I've also had the honor to collaborate with <a href="https://cseweb.ucsd.edu/~ravir/">Prof. Ravi Ramamoorthi</a>.
+                </p>
+                <p>
+                  I was a research intern at the Media Analytics team at <a href="https://www.nec-labs.com/">NEC Laboratories America</a> (2025) in <a href="https://www.nec-labs.com/research/media-analytics/">Manmohan Chandraker's Group</a>, working on a physics-constrained, traffic-aware pedestrian behavior simulator for real-world driving videos.
+                </p>
+                <p>
+                  I received my M.S. and B.S. in ECE from Rice University.
+                </p>
+                <p style="text-align:center">
+                  <a href="mailto:tony.yu@rice.edu">Email</a> &nbsp;/&nbsp;
+                  <a href="data/BoyangYu-CV.pdf">CV</a> &nbsp;/&nbsp;
+                  <a href="https://scholar.google.com/citations?user=PLACEHOLDER">Scholar</a> &nbsp;/&nbsp;
+                  <a href="https://github.com/tonyyu0822">Github</a>
+                </p>
+              </td>
+              <td style="padding:2.5%;width:37%;max-width:37%">
+                <a href="images/BoyangYu.jpg"><img style="width:100%;max-width:100%;object-fit: cover; border-radius: 50%;" alt="profile photo" src="images/BoyangYu.jpg" class="hoverZoomLink"></a>
+              </td>
+            </tr>
+          </tbody></table>
 
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
-        rel="stylesheet">
+          <!-- Research intro -->
+          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+            <tr>
+              <td style="padding:16px;width:100%;vertical-align:middle">
+                <h2>Research</h2>
+                <p>
+                  I'm interested in computer vision, deep learning, computer graphics, neural rendering, and radiance transfer. My focus is on efficient algorithms for real-time photorealistic relighting in dynamic 3D scenes. Some papers are <span class="highlight">highlighted</span>.
+                </p>
+              </td>
+            </tr>
+          </tbody></table>
 
-  <link rel="stylesheet" href="./static/css/bulma.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-  <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css">
-  <link rel="icon" href="./static/images/favicon.svg">
+          <!-- Papers -->
+          <table style="width:100%;border:0px;border-spacing:0px 10px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="./static/js/fontawesome.all.min.js"></script>
-  <script src="./static/js/bulma-carousel.min.js"></script>
-  <script src="./static/js/bulma-slider.min.js"></script>
-  <script src="./static/js/index.js"></script>
-</head>
-<body>
-
-<nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
-  <div class="navbar-menu">
-    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-      <a class="navbar-item" href="https://keunhong.com">
-      <span class="icon">
-          <i class="fas fa-home"></i>
-      </span>
-      </a>
-
-      <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          More Research
-        </a>
-        <div class="navbar-dropdown">
-          <a class="navbar-item" href="https://hypernerf.github.io">
-            HyperNeRF
-          </a>
-          <a class="navbar-item" href="https://nerfies.github.io">
-            Nerfies
-          </a>
-          <a class="navbar-item" href="https://latentfusion.github.io">
-            LatentFusion
-          </a>
-          <a class="navbar-item" href="https://photoshape.github.io">
-            PhotoShape
-          </a>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</nav>
-
-
-<section class="hero">
-  <div class="hero-body">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">TranSplat: Instant Cross-Scene Object Relighting in Gaussian Splatting
-via Spherical Harmonic Transfer</h1>
-          <div class="is-size-5 publication-authors">
-            <span class="author-block">
-              <a href="https://tonyyu0822.github.io">Boyang (Tony) Yu</a><sup><span style="font-size: 1.5em;">*</span>1</sup>,
-            </span>
-            <span class="author-block">
-              <a href="https://www.neiljin.site">Yanlin Jin</a><sup><span style="font-size: 1.5em;">*</span>1</sup>,
-            </span>
-            <span class="author-block">
-              <a href="https://yunhe20.github.io/">Yun He</a><sup>2</sup>,
-            </span>
-            <span class="author-block">
-              <a href="https://akshatdave.github.io/">Akshat Dave</a><sup>3</sup>,
-            </span>
-            <span class="author-block">
-              <a href="https://www.guhabalakrishnan.com/">Guha Balakrishnan</a><sup>1</sup>,
-            </span>
-          </div>
-
-          <div class="is-size-5 publication-authors">
-            <span class="author-block"><sup><span style="font-size: 1.5em;">*</span></sup>Equal Contribution,</span>
-            <span class="author-block"><sup>1</sup>Rice University,</span>
-            <span class="author-block"><sup>2</sup>University of Maryland</span>
-            <span class="author-block"><sup>3</sup>Stony Brook University</span>
-          </div>
-
-          <div class="column has-text-centered">
-            <div class="publication-links">
-              <!-- PDF Link. -->
-              <span class="link-block">
-                <a href="https://arxiv.org/abs/2503.22676"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fas fa-file-pdf"></i>
-                  </span>
-                  <span>Paper</span>
+            <!-- TranSplat -->
+            <tr onmouseout="transplat_stop()" onmouseover="transplat_start()" bgcolor="#ffffd0">
+              <td style="padding:16px;width:20%;vertical-align:middle">
+                <div class="one">
+                  <div class="two" id='transplat_image'>
+                    <img src='images/after.jpg' width=100%>
+                  </div>
+                  <img src='images/before.jpg' width=100%>
+                </div>
+                <script type="text/javascript">
+                  function transplat_start() {
+                    document.getElementById('transplat_image').style.opacity = "1";
+                  }
+                  function transplat_stop() {
+                    document.getElementById('transplat_image').style.opacity = "0";
+                  }
+                  transplat_stop()
+                </script>
+              </td>
+              <td style="padding:8px;width:80%;vertical-align:middle">
+                <a href="https://tonyyu0822.github.io/transplat/">
+                  <span class="papertitle">TranSplat: Instant Cross-Scene Object Relighting in Gaussian Splatting via Spherical Harmonic Transfer</span>
                 </a>
-              </span>
-              <span class="link-block">
-                <a href="https://arxiv.org/abs/2503.22676"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="ai ai-arxiv"></i>
-                  </span>
-                  <span>arXiv</span>
+                <br>
+                <strong>Boyang Yu</strong>*,
+                <a href="https://www.neiljin.site">Yanlin Jin</a>*,
+                <a href="https://yunhe20.github.io/">Yun He</a>,
+                <a href="https://akshatdave.github.io/">Akshat Dave</a>,
+                <a href="https://www.guhabalakrishnan.com/">Guha Balakrishnan</a>
+                <br>
+                <em>arXiv</em>, 2025
+                <br>
+                <a href="https://tonyyu0822.github.io/transplat/">project page</a>
+                /
+                <a href="https://arxiv.org/abs/2503.22676">arXiv</a>
+                <p></p>
+                <p>
+                  TranSplat enables fast cross-scene object relighting in 3D Gaussian Splatting via a radiance transfer identity based on spherical harmonic products, without requiring explicit material property estimation.
+                </p>
+              </td>
+            </tr>
+
+            <!-- ACM paper placeholder -->
+            <tr onmouseout="acm_stop()" onmouseover="acm_start()">
+              <td style="padding:16px;width:20%;vertical-align:middle">
+                <div class="one">
+                  <div class="two" id='acm_image'>
+                    <img src='images/before.jpg' width=100%>
+                  </div>
+                  <img src='images/before.jpg' width=100%>
+                </div>
+                <script type="text/javascript">
+                  function acm_start() {
+                    document.getElementById('acm_image').style.opacity = "1";
+                  }
+                  function acm_stop() {
+                    document.getElementById('acm_image').style.opacity = "0";
+                  }
+                  acm_stop()
+                </script>
+              </td>
+              <td style="padding:8px;width:80%;vertical-align:middle">
+                <a href="https://dl.acm.org/doi/abs/10.1145/3579371.3589115">
+                  <span class="papertitle">[Paper Title — Placeholder]</span>
                 </a>
-              </span>
-              <!-- Video (coming soon) -->
-              <span class="link-block">
-                <a class="external-link button is-normal is-rounded is-light" disabled>
-                  <span class="icon">
-                      <i class="fab fa-youtube"></i>
-                  </span>
-                  <span>Video (Coming Soon)</span>
-                </a>
-              </span>
+                <br>
+                <strong>Boyang Yu</strong>,
+                [Co-authors — Placeholder]
+                <br>
+                <em>[Venue — Placeholder]</em>, [Year]
+                <br>
+                <a href="https://dl.acm.org/doi/abs/10.1145/3579371.3589115">paper</a>
+                <p></p>
+                <p>
+                  [Paper description — Placeholder]
+                </p>
+              </td>
+            </tr>
 
-              <!-- Code Link. -->
-              <span class="link-block">
-                <a href="https://github.com/google/nerfies"
-                   class="external-link button is-normal is-rounded is-dark"disabled>
-                  <span class="icon">
-                      <i class="fab fa-github"></i>
-                  </span>
-                  <span>Code(Coming Soon)</span>
-                  </a>
-              </span>
+          </tbody></table>
 
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+          <!-- Footer -->
+          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+            <tr>
+              <td style="padding:0px">
+                <br>
+                <p style="text-align:right;font-size:small;">
+                  Website template from <a href="https://jonbarron.info">Jon Barron</a>.
+                </p>
+              </td>
+            </tr>
+          </tbody></table>
 
-<!-- <section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <div class="video-container" style="display: flex; justify-content: center; align-items: center; gap: 20px;">
-        <video id="teaser1" autoplay muted loop playsinline height="100%">
-          <source src="./static/videos/originalvs gsir.mp4" type="video/mp4">
-        </video>
-        <video id="teaser2" autoplay muted loop playsinline height="100%">
-          <source src="./static/videos/Transplat Roating comparison.mp4" type="video/mp4">
-        </video>
-      </div>
-      <h2 class="subtitle has-text-centered">
-        <span class="dnerf">Transplat relighting on synthetic TensoIR dataset</span>
-      </h2>
-    </div>
-  </div>
-</section> -->
-
-<section class="hero teaser">
-  <div class="hero-body">
-    <div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
-      <video autoplay muted loop playsinline style="width: 48%; height: auto;">
-        <source src="./static/videos/originalvs gsir.mp4" type="video/mp4">
-      </video>
-      <video autoplay muted loop playsinline style="width: 48%; height: auto;">
-        <source src="./static/videos/Transplat Roating comparison.mp4" type="video/mp4">
-      </video>
-    </div>
-    <h2 class="subtitle has-text-centered">
-      <span class="dnerf">Transplat relighting on synthetic TensoIR dataset</span>
-    </h2>
-  </div>
-</section>
-
-
-<section class="hero is-light is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item item-steve">
-          <div class="image-comparison">
-            <div class="images-container">
-              <img class="before-image" src="static/images/comparison/chair_before.png" alt="" />
-              <img class="after-image" src="static/images/comparison/chair_after.png" alt="" />
-          
-              <div class="slider-line"></div>
-              <div class="slider-icon">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="w-6 h-6"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"
-                  />
-                </svg>
-              </div>
-          
-              <input type="range" class="slider" min="0" max="100" />
-            </div>
-          </div>
-        </div>
-        <div class="item item-chair-tp">
-          <div class="image-comparison">
-            <div class="images-container">
-              <img class="before-image" src="static/images/comparison/teaser_before.png" alt="" />
-              <img class="after-image" src="static/images/comparison/teaser_after.png" alt="" />
-              <div class="slider-line"></div>
-              <div class="slider-icon">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="w-6 h-6"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"
-                  />
-                </svg>
-              </div>
-          
-              <input type="range" class="slider" min="0" max="100" />
-            </div>
-          </div>
-        </div>
-        <div class="item item-shiba">
-          <div class="image-comparison">
-            <div class="images-container">
-              <img class="before-image" src="static/images/comparison/room_before.png" alt="" />
-              <img class="after-image" src="static/images/comparison/room_after.png" alt="" />
-          
-              <div class="slider-line"></div>
-              <div class="slider-icon">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="w-6 h-6"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"
-                  />
-                </svg>
-              </div>
-          
-              <input type="range" class="slider" min="0" max="100" />
-            </div>
-          </div>
-        </div>
-        <div class="item item-fullbody">
-          <div class="image-comparison">
-            <div class="images-container">
-              <img class="before-image" src="static/images/comparison/armadillo_before.png" alt="" />
-              <img class="after-image" src="static/images/comparison/armadillo_after.png" alt="" />
-          
-              <div class="slider-line"></div>
-              <div class="slider-icon">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="w-6 h-6"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"
-                  />
-                </svg>
-              </div>
-          
-              <input type="range" class="slider" min="0" max="100" />
-            </div>
-          </div>
-        </div>
-        <div class="item item-blueshirt">
-          <div class="image-comparison">
-            <div class="images-container">
-
-              <img class="before-image" src="static/images/comparison/bench_before.png" alt="" />
-              <img class="after-image" src="static/images/comparison/bench_after.png" alt="" />
-
-              <div class="slider-line"></div>
-              <div class="slider-icon">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="w-6 h-6"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"
-                  />
-                </svg>
-              </div>
-          
-              <input type="range" class="slider" min="0" max="100" />
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<script src="static/js/slide.js"></script>
-
-<!-- Abstract -->
-<section class="section">
-  <div class="container is-max-widescreen">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-11-desktop">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          <p>
-            We present TranSplat, a method for fast and accurate object relighting for the 3D Gaussian Splatting (GS) framework when transferring a 3D object from a source GS scene to a target GS scene. TranSplat is based on a theoretical radiance transfer identity for cross-scene relighting of objects with radially symmetric BRDFs that involves only taking simple products of spherical harmonic appearance coefficients of the object, source, and target environment maps without any explicit computation of scene quantities (e.g., the BRDFs themselves). TranSplat is the first method to demonstrate how this theoretical identity may be used to perform relighting within the GS framework, and furthermore, by automatically inferring unknown source and target environment maps directly from the source and target scene GS representations.
-          </p>
-          <p>
-            We evaluated TranSplat on several synthetic and real-world scenes and objects, demonstrating comparable 3D object relighting performance to recent conventional inverse rendering-based GS methods with a fraction of their runtime. While TranSplat is theoretically best-suited for radially symmetric BRDFs, results demonstrate that TranSplat still offers perceptually realistic renderings on real scenes and opens a valuable, lightweight path forward to relighting with the GS framework.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Motivation -->
-<section class="section">
-  <div class="container is-max-widescreen">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-11-desktop">
-        <h2 class="title is-3">Motivation</h2>
-        <div class="content has-text-justified">
-          <p>
-            The Gaussian Splatting (GS) framework represents a scene as optimizable Gaussian primitives, offering fast, differentiable rendering and semantic decomposition. Building on GS, recent methods enable interactive scene editing—recoloring objects or inserting new ones—by manipulating these primitives.
-          </p>
-          <p>
-            We tackle the fundamental task of transferring a 3D object from one scene to another with realistic relighting. This involves (1) extracting and aligning the object in 3D, and (2) removing source lighting effects and applying target-scene illumination without estimating explicit material properties. To meet these challenges, we introduce TranSplat.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Method -->
-<section class="section">
-  <div class="container is-max-widescreen">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-11-desktop">
-        <h2 class="title is-3">Method</h2>
-
-        <figure class="image">
-          <img
-            src="./static/images/Method.pdf"
-            alt="TranSplat Method Overview"
-          >
-          <figcaption class="has-text-centered">
-            Figure 1: Overview of the TranSplat pipeline.
-          </figcaption>
-        </figure>
-
-        <div class="content has-text-justified">
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ─── INTERPOLATION SECTION ─── -->
-<style>
-  /* full-width & taller */
-  .interpolation-section {
-    padding: 2rem 0;
-    min-height: 60vh;
-  }
-  /* override Bulma container to be fluid here */
-  .interpolation-section .container {
-    max-width: 95vw;
-  }
-
-  /* SPACE & SIZE for the top env-map buttons */
-  .interpolation-section .envmap-selectors .column {
-    margin: 0 1.5rem;
-    flex: none;
-  }
-  .interpolation-section .envmap-selectors .column img {
-    max-width: 260px;
-    cursor: pointer;
-  }
-
-  /* BIGGER source/target thumbs */
-  .interpolation-section #source-envmap,
-  .interpolation-section #target-envmap {
-    max-width: 260px;
-  }
-
-  /* a slightly taller slider */
-  .interpolation-section .slider {
-    height: 1.8rem;
-  }
-</style>
-
-<section class="section interpolation-section">
-  <div class="container is-fluid">
-
-    <h2 class="title is-3">Relighting Results <span class="is-size-7">(More 3D results are on the way)</span></h2>
-    <div class="content has-text-justified">
-      <p>
-        Novel views of the relighting results on TensoIR dataset across different environment maps.
-      </p>
-    </div>
-
-    <!-- 1) BIG ENV-MAP SELECTORS -->
-    <div class="columns is-centered envmap-selectors">
-      <div class="column is-narrow has-text-centered">
-        <img
-          src="./static/images/envmaps/fireplace.jpg"
-          class="env-button interpolation-image"
-          data-base="./static/interpolation/fireplace"
-          data-frames="197"
-          alt="Fireplace Env Map"
-        />
-        <p>Fireplace</p>
-      </div>
-      <div class="column is-narrow has-text-centered">
-        <img
-          src="./static/images/envmaps/sunset.jpg"
-          class="env-button interpolation-image"
-          data-base="./static/interpolation/sunset"
-          data-frames="197"
-          alt="Sunset Env Map"
-        />
-        <p>Sunset</p>
-      </div>
-      <div class="column is-narrow has-text-centered">
-        <img
-          src="./static/images/envmaps/forest.jpg"
-          class="env-button interpolation-image"
-          data-base="./static/interpolation/stacked"
-          data-frames="197"
-          alt="Forest Env Map"
-        />
-        <p>Forest</p>
-      </div>
-    </div>
-
-    <!-- 2) WIDE SLIDER PANEL -->
-    <div class="columns is-vcentered interpolation-panel">
-      <!-- source fixed -->
-      <div class="column is-3 has-text-centered">
-        <img
-          id="source-envmap"
-          src="./static/images/envmaps/city.jpg"
-          class="interpolation-image"
-          alt="Source Env Map: City"
-        />
-        <p>Source Env Map: City</p>
-      </div>
-
-      <!-- big centered slider -->
-      <div class="column is-6 interpolation-video-column">
-        <div id="interpolation-image-wrapper">Loading…</div>
-        <input
-          id="interpolation-slider"
-          class="slider is-fullwidth is-large is-info"
-          type="range"
-          step="1"
-          min="0"
-          max="196"
-          value="0"
-        />
-      </div>
-
-      <!-- target swaps on click -->
-      <div class="column is-3 has-text-centered">
-        <img
-          id="target-envmap"
-          src="./static/images/envmaps/fireplace.jpg"
-          class="interpolation-image"
-          alt="Target Env Map"
-        />
-        <p id="target-envmap-label">Target Env Map</p>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-
-
-
-<!-- Experiments -->
-<section class="section">
-  <div class="container is-max-widescreen">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-11-desktop">
-        <h2 class="title is-3">Experiments</h2>
-
-        <figure class="image">
-          <img 
-            src="./static/images/Experiment.png" 
-            alt="TranSplat Experimental Results"
-          >
-          <figcaption class="has-text-centered">
-            Figure 2: Qualitative comparison of TranSplat with recent Gaussian relighting methods.
-          </figcaption>
-        </figure>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<section class="section" id="BibTeX">
-  <div class="container is-max-desktop content">
-    <h2 class="title">BibTeX</h2>
-    <pre><code>@misc{yu2025transplatinstantcrosssceneobject,
-      title={TranSplat: Instant Cross-Scene Object Relighting in Gaussian Splatting via Spherical Harmonic Transfer}, 
-      author={Boyang Yu and Yanlin Jin and Yun He and Akshat Dave and Guha Balakrishnan},
-      year={2025},
-      eprint={2503.22676},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV},
-      url={https://arxiv.org/abs/2503.22676}, 
-}</code></pre>
-  </div>
-</section>
-
-
-</body>
+        </td>
+      </tr>
+    </tbody></table>
+  </body>
 </html>
