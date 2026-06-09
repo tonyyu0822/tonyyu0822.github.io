@@ -42,8 +42,20 @@
                   <a href="https://github.com/tonyyu0822">Github</a>
                 </p>
               </td>
-              <td style="padding:2.5%;width:37%;max-width:37%">
-                <a href="images/BoyangYu.jpg"><img style="width:100%;max-width:100%;object-fit: cover; border-radius: 50%;" alt="profile photo" src="images/BoyangYu.jpg" class="hoverZoomLink"></a>
+              <td style="padding:2.5%;width:30%;max-width:30%">
+                <a href="images/BoyangYu.jpg"><img style="width:100%;max-width:100%;object-fit: cover;" alt="profile photo" src="images/BoyangYu.jpg" class="hoverZoomLink"></a>
+              </td>
+            </tr>
+          </tbody></table>
+
+          <!-- News -->
+          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+            <tr>
+              <td style="padding:16px;width:100%;vertical-align:middle">
+                <h2>News</h2>
+                <ul>
+                  <li><strong>June 2026</strong> &mdash; <a href="https://tonyyu0822.github.io/transplat/">TranSplat</a> has been accepted to <strong>ICCP 2026</strong>! See you all in Princeton!</li>
+                </ul>
               </td>
             </tr>
           </tbody></table>
@@ -64,43 +76,30 @@
           <table style="width:100%;border:0px;border-spacing:0px 10px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
 
             <!-- TranSplat -->
-            <tr onmouseout="transplat_stop()" onmouseover="transplat_start()" bgcolor="#ffffd0">
+            <tr bgcolor="#ffffd0">
               <td style="padding:16px;width:20%;vertical-align:middle">
-                <div class="one">
-                  <div class="two" id='transplat_image'>
-                    <img src='images/after.jpg' width=100%>
-                  </div>
-                  <img src='images/before.jpg' width=100%>
-                </div>
-                <script type="text/javascript">
-                  function transplat_start() {
-                    document.getElementById('transplat_image').style.opacity = "1";
-                  }
-                  function transplat_stop() {
-                    document.getElementById('transplat_image').style.opacity = "0";
-                  }
-                  transplat_stop()
-                </script>
+                <img src='images/BoyangYu.jpg' width=100%>
               </td>
               <td style="padding:8px;width:80%;vertical-align:middle">
                 <a href="https://tonyyu0822.github.io/transplat/">
-                  <span class="papertitle">TranSplat: Instant Cross-Scene Object Relighting in Gaussian Splatting via Spherical Harmonic Transfer</span>
+                  <span class="papertitle">TranSplat: Instant Object Relighting in Gaussian Splatting via Spherical Harmonic Radiance Transfer</span>
                 </a>
                 <br>
-                <strong>Boyang Yu</strong>*,
-                <a href="https://www.neiljin.site">Yanlin Jin</a>*,
+                <strong>Boyang Tony Yu</strong>,
+                <a href="https://www.neiljin.site">Yanlin Jin</a>,
                 <a href="https://yunhe20.github.io/">Yun He</a>,
                 <a href="https://akshatdave.github.io/">Akshat Dave</a>,
+                <a href="https://cseweb.ucsd.edu/~ravir/">Ravi Ramamoorthi</a>,
                 <a href="https://www.guhabalakrishnan.com/">Guha Balakrishnan</a>
                 <br>
-                <em>arXiv</em>, 2025
+                <em>ICCP</em>, 2026
                 <br>
                 <a href="https://tonyyu0822.github.io/transplat/">project page</a>
                 /
                 <a href="https://arxiv.org/abs/2503.22676">arXiv</a>
                 <p></p>
                 <p>
-                  TranSplat enables fast cross-scene object relighting in 3D Gaussian Splatting via a radiance transfer identity based on spherical harmonic products, without requiring explicit material property estimation.
+                  A BRDF-free radiance transfer method that analytically modulates spherical harmonic appearance coefficients of 2D Gaussian surfels using per-normal irradiance ratios from source and target environment maps. Includes a specularity-aware dual-path SH transfer strategy and a lightweight SH-domain self-shadowing module. Operates as a post-processing step with no GS retraining required, completing relighting in under one second.
                 </p>
               </td>
             </tr>
