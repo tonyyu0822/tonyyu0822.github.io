@@ -51,7 +51,7 @@
           <img
             src="./static/images/transplat_logo.png"
             alt="TranSplat"
-            style="max-width: 380px; width: 100%; height: auto; margin-bottom: 1.25rem;" />
+            style="height: 4.5rem; width: auto; margin-bottom: 0.5rem;" />
           <h1 class="title is-1 publication-title">Instant Cross-Scene Object Relighting in Gaussian Splatting
 via Spherical Harmonic Transfer</h1>
           <div class="is-size-5 publication-authors">
@@ -449,27 +449,7 @@ via Spherical Harmonic Transfer</h1>
       <h3 class="title is-4">Additional Relighting Demonstrations</h3>
     </div>
     <div class="columns is-centered is-flex" style="flex-wrap: wrap;">
-      <div class="column has-text-centered" style="flex: 1 1 33%; max-width: 33%; padding: 10px;">
-        <video
-          class="interpolation-image"
-          autoplay muted loop playsinline webkit-playsinline preload="auto"
-          poster="./static/images/posters/specular_ablation.jpg"
-          style="width: 100%; height: auto; border-radius: 10px;">
-          <source src="static/videos/specular_ablation.mp4" type="video/mp4">
-        </video>
-        <p>Specular Ablation</p>
-      </div>
-      <div class="column has-text-centered" style="flex: 1 1 33%; max-width: 33%; padding: 10px;">
-        <video
-          class="interpolation-image"
-          autoplay muted loop playsinline webkit-playsinline preload="auto"
-          poster="./static/images/posters/dynamic_relighting.jpg"
-          style="width: 100%; height: auto; border-radius: 10px;">
-          <source src="static/videos/dynamic_relighting.mp4" type="video/mp4">
-        </video>
-        <p>Dynamic Relighting</p>
-      </div>
-      <div class="column has-text-centered" style="flex: 1 1 33%; max-width: 33%; padding: 10px;">
+      <div class="column has-text-centered" style="flex: 1 1 50%; max-width: 50%; padding: 10px;">
         <video
           class="interpolation-image"
           autoplay muted loop playsinline webkit-playsinline preload="auto"
@@ -479,8 +459,40 @@ via Spherical Harmonic Transfer</h1>
         </video>
         <p>Spatially-Varying Relighting (Diffuse &harr; Glossy)</p>
       </div>
+      <div class="column has-text-centered" style="flex: 1 1 50%; max-width: 50%; padding: 10px;">
+        <video
+          class="interpolation-image"
+          autoplay muted loop playsinline webkit-playsinline preload="auto"
+          poster="./static/images/posters/specular_ablation.jpg"
+          style="width: 100%; height: auto; border-radius: 10px;">
+          <source src="static/videos/specular_ablation.mp4" type="video/mp4">
+        </video>
+        <p>Specular Ablation</p>
+      </div>
     </div>
 
+  </div>
+</section>
+
+<!-- Dynamic Relighting GUI -->
+<section class="section">
+  <div class="container is-max-widescreen">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-11-desktop">
+        <h2 class="title is-3">Dynamic Relighting</h2>
+        <div class="content has-text-justified">
+          <p>
+            We built a dedicated GUI for TranSplat, you can sample the target/source envmap in realtime and try real-time spatially varying relighting!
+          </p>
+        </div>
+        <video
+          autoplay muted loop playsinline webkit-playsinline preload="auto"
+          poster="./static/images/posters/dynamic_relighting.jpg"
+          style="width: 100%; max-width: 960px; height: auto; border-radius: 10px; display: block; margin: 0 auto;">
+          <source src="static/videos/dynamic_relighting.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -491,16 +503,6 @@ via Spherical Harmonic Transfer</h1>
     <div class="columns is-centered has-text-centered">
       <div class="column is-11-desktop">
         <h2 class="title is-3">Experiments</h2>
-
-        <figure class="image mt-6">
-          <img 
-            src="./static/images/mask_fit_v2.jpg" 
-            alt="TranSplat Segmentation Results"
-          >
-          <figcaption class="has-text-centered">
-            Figure 2: Example of TranSplat extracting fine details of an object when fitting a GS model to a source scene.
-          </figcaption>
-        </figure>
 
         <figure class="image mt-6">
           <img 
