@@ -52,8 +52,8 @@
             src="./static/images/transplat_logo.png"
             alt="TranSplat"
             style="height: 6.75rem; width: auto; margin-bottom: 0.5rem;" />
-          <h1 class="title is-1 publication-title">Instant Cross-Scene Object Relighting in Gaussian Splatting
-via Spherical Harmonic Transfer</h1>
+          <h1 class="title is-1 publication-title">Instant Object Relighting in Gaussian Splatting
+via Spherical Harmonic Radiance Transfer</h1>
           <div class="is-size-4 publication-venue">ICCP 2026</div>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
@@ -331,13 +331,29 @@ via Spherical Harmonic Transfer</h1>
 <section class="section interpolation-section">
   <div class="container is-fluid has-text-centered">
     <h2 class="title is-3">Relighting Results</h2>
+    
+    <figure class="image mt-6 mb-6">
+      <img 
+        src="./static/images/Experiment.png" 
+        alt="TranSplat Relighting Results"
+      >
+      <figcaption class="has-text-centered">
+        Figure 2: Qualitative comparison of TranSplat with recent Gaussian relighting methods.
+      </figcaption>
+    </figure>
+
+    <div class="content has-text-centered" style="margin-top: 2.5rem; margin-bottom: 2.5rem;">
+      <iframe width="960" height="540" src="https://www.youtube.com/embed/M9mo8U2p0EQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="border-radius: 10px;"></iframe>
+    </div>
+
+    <!-- COMMENTED OUT SLIDER
     <div class="content has-text-centered">
       <p>
         Novel views of the relighting results on TensoIR dataset across different environment maps. Click to select the target environment map.
       </p>
     </div>
 
-    <!-- 1) BIG ENV-MAP SELECTORS -->
+    <!- - 1) BIG ENV-MAP SELECTORS - ->
     <div class="columns is-centered is-flex">
       <div class="column has-text-centered" style="flex: 1 1 33%; max-width: 33%; padding: 10px;">
         <img
@@ -386,9 +402,9 @@ via Spherical Harmonic Transfer</h1>
       </div>
     </div>
 
-    <!-- 2) WIDE SLIDER PANEL -->
+    <!- - 2) WIDE SLIDER PANEL - ->
     <div class="columns is-vcentered interpolation-panel">
-      <!-- source fixed -->
+      <!- - source fixed - ->
       <div class="column is-3 has-text-centered">
         <img
           id="source-envmap"
@@ -403,7 +419,7 @@ via Spherical Harmonic Transfer</h1>
         <p>Source Env Map: City</p>
       </div>
 
-      <!-- big centered slider -->
+      <!- - big centered slider - ->
       <div class="column is-6 interpolation-video-column">
         <div id="interpolation-image-wrapper">
           <video
@@ -429,7 +445,7 @@ via Spherical Harmonic Transfer</h1>
         />
       </div>
 
-      <!-- target swaps on click -->
+      <!- - target swaps on click - ->
       <div class="column is-3 has-text-centered">
         <img
           id="target-envmap"
@@ -444,10 +460,11 @@ via Spherical Harmonic Transfer</h1>
         <p id="target-envmap-label">Target Env Map</p>
       </div>
     </div>
+    -->
 
-    <!-- 3) ADDITIONAL RELIGHTING DEMOS -->
+    <!-- 3) DYNAMIC RELIGHTING -->
     <div class="content has-text-centered" style="margin-top: 2.5rem;">
-      <h3 class="title is-4">Additional Relighting Demonstrations</h3>
+      <h3 class="title is-4">Dynamic Relighting</h3>
     </div>
     <div class="columns is-centered is-flex" style="flex-wrap: wrap;">
       <div class="column has-text-centered" style="flex: 1 1 50%; max-width: 50%; padding: 10px;">
@@ -465,12 +482,12 @@ via Spherical Harmonic Transfer</h1>
   </div>
 </section>
 
-<!-- Dynamic Relighting GUI -->
+<!-- TranSplat GUI -->
 <section class="section">
   <div class="container is-max-widescreen">
     <div class="columns is-centered has-text-centered">
       <div class="column is-11-desktop">
-        <h2 class="title is-3">Dynamic Relighting</h2>
+        <h2 class="title is-3">TranSplat GUI</h2>
         <div class="content has-text-justified">
           <p>
             We built a dedicated GUI for TranSplat, you can sample the target/source envmap in realtime and try real-time spatially varying relighting!
@@ -488,26 +505,7 @@ via Spherical Harmonic Transfer</h1>
 </section>
 
 
-<!-- Experiments -->
-<section class="section">
-  <div class="container is-max-widescreen">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-11-desktop">
-        <h2 class="title is-3">Experiments</h2>
-
-        <figure class="image mt-6">
-          <img 
-            src="./static/images/Experiment.png" 
-            alt="TranSplat Relighting Results"
-          >
-          <figcaption class="has-text-centered">
-            Figure 2: Qualitative comparison of TranSplat with recent Gaussian relighting methods.
-          </figcaption>
-        </figure>
-      </div>
-    </div>
-  </div>
-</section>
+<!-- Experiments Section Moved -->
 
 
 <section class="section" id="BibTeX">
